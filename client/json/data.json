@@ -1,0 +1,404 @@
+{
+  "app": [
+    {
+      "id": 1,
+      "name": "Samarth"
+    },
+    {
+      "id": 2,
+      "name": "Tattva"
+    },
+    {
+      "id": 3,
+      "name": "DataMill"
+    },
+    {
+      "id": 4,
+      "name": "QuizRT"
+    },
+    {
+      "id": 5,
+      "name": "Samarth Sahayak"
+    },
+    {
+      "id": 6,
+      "name": "Tattav 1 "
+    },
+    {
+      "id": 7,
+      "name": "Tattava 2"
+    },
+    {
+      "id": 8,
+      "name": "Tattava 3"
+    },
+    {
+      "id": 9,
+      "name": "Datamill1"
+    },
+    {
+      "id": 10,
+      "name": "Datamill2"
+    }
+  ],
+  "node": [
+    {
+      "author": "xyz",
+      "title": "Node 1"
+    },
+    {
+      "author": "xyz",
+      "title": "Node 2"
+    },
+    {
+      "author": "xyz",
+      "title": "Node 3"
+    },
+    {
+      "author": "xyz",
+      "title": "Node 4"
+    },
+    {
+      "author": "xyz",
+      "title": "Node 5"
+    },
+    {
+      "author": "xyz",
+      "title": "Node 6"
+    },
+    {
+      "author": "xyz",
+      "title": "Node 7"
+    },
+    {
+      "author": "xyz",
+      "title": "Node 8"
+    },
+    {
+      "author": "xyz",
+      "title": "Node 9"
+    },
+    {
+      "author": "xyz",
+      "title": "Node 10"
+    },
+    {
+      "author": "xyz",
+      "title": "Node 11"
+    },
+    {
+      "author": "xyz",
+      "title": "Node 12"
+    }
+  ],
+  "nodes": [
+    {
+      "Node1": [
+        {
+          "author": "xyz",
+          "title": "Container 1"
+        },
+        {
+          "author": "xyz",
+          "title": "Container 2"
+        },
+        {
+          "author": "xyz",
+          "title": "Container 3"
+        },
+        {
+          "author": "xyz",
+          "title": "Container 4"
+        },
+        {
+          "author": "xyz",
+          "title": "Container 5"
+        },
+        {
+          "author": "xyz",
+          "title": "Container 6"
+        }
+      ],
+      "Node2": [
+        {
+          "author": "xyz",
+          "title": "Container 1"
+        },
+        {
+          "author": "xyz",
+          "title": "Container 2"
+        },
+        {
+          "author": "xyz",
+          "title": "Container 3"
+        },
+        {
+          "author": "xyz",
+          "title": "Container 4"
+        },
+        {
+          "author": "xyz",
+          "title": "Container 5"
+        },
+        {
+          "author": "xyz",
+          "title": "Container 6"
+        },
+        {
+          "author": "xyz",
+          "title": "Container 7"
+        },
+        {
+          "author": "xyz",
+          "title": "Container 8"
+        },
+        {
+          "author": "xyz",
+          "title": "Container 9"
+        },
+        {
+          "author": "xyz",
+          "title": "Container 10"
+        },
+        {
+          "author": "xyz",
+          "title": "Container 11"
+        },
+        {
+          "author": "xyz",
+          "title": "Container 12"
+        },
+        {
+          "author": "xyz",
+          "title": "Container 13"
+        },
+        {
+          "author": "xyz",
+          "title": "Container 14"
+        },
+        {
+          "author": "xyz",
+          "title": "Container 15"
+        }
+      ],
+      "Node3": [
+        {
+          "author": "xyz",
+          "title": "Container 1"
+        },
+        {
+          "author": "xyz",
+          "title": "Container 2"
+        },
+        {
+          "author": "xyz",
+          "title": "Container 3"
+        },
+        {
+          "author": "xyz",
+          "title": "Container 4"
+        },
+        {
+          "author": "xyz",
+          "title": "Container 5"
+        },
+        {
+          "author": "xyz",
+          "title": "Container 6"
+        },
+        {
+          "author": "xyz",
+          "title": "Container 7"
+        },
+        {
+          "author": "xyz",
+          "title": "Container 8"
+        },
+        {
+          "author": "xyz",
+          "title": "Container 9"
+        },
+        {
+          "author": "xyz",
+          "title": "Container 10"
+        },
+        {
+          "author": "xyz",
+          "title": "Container 11"
+        },
+        {
+          "author": "xyz",
+          "title": "Container 12"
+        },
+        {
+          "author": "xyz",
+          "title": "Container 13"
+        },
+        {
+          "author": "xyz",
+          "title": "Container 14"
+        },
+        {
+          "author": "xyz",
+          "title": "Container 15"
+        }
+      ],
+      "Node4": [
+        {
+          "author": "xyz",
+          "title": "Container 1"
+        },
+        {
+          "author": "xyz",
+          "title": "Container 2"
+        },
+        {
+          "author": "xyz",
+          "title": "Container 3"
+        },
+        {
+          "author": "xyz",
+          "title": "Container 4"
+        },
+        {
+          "author": "xyz",
+          "title": "Container 5"
+        },
+        {
+          "author": "xyz",
+          "title": "Container 6"
+        },
+        {
+          "author": "xyz",
+          "title": "Container 7"
+        },
+        {
+          "author": "xyz",
+          "title": "Container 8"
+        },
+        {
+          "author": "xyz",
+          "title": "Container 9"
+        },
+        {
+          "author": "xyz",
+          "title": "Container 10"
+        },
+        {
+          "author": "xyz",
+          "title": "Container 11"
+        },
+        {
+          "author": "xyz",
+          "title": "Container 12"
+        },
+        {
+          "author": "xyz",
+          "title": "Container 13"
+        },
+        {
+          "author": "xyz",
+          "title": "Container 14"
+        },
+        {
+          "author": "xyz",
+          "title": "Container 15"
+        }
+      ]
+    }
+  ],
+  "replica": [
+    {
+      "ip": "123.111.1.1",
+      "name": "Service1",
+      "status": "running"
+    },
+    {
+      "ip": "123.111.1.2",
+      "name": "Service2",
+      "status": "stopped"
+    },
+    {
+      "ip": "123.111.1.3",
+      "name": "Service3",
+      "status": "running"
+    },
+    {
+      "ip": "123.111.1.3",
+      "name": "Service4",
+      "status": "running"
+    },
+    {
+      "ip": "123.111.1.3",
+      "name": "Service5",
+      "status": "running"
+    },
+    {
+      "ip": "123.111.1.3",
+      "name": "Service6",
+      "status": "running"
+    },
+    {
+      "ip": "123.111.1.3",
+      "name": "Service7",
+      "status": "running"
+    },
+    {
+      "ip": "123.111.1.3",
+      "name": "Service8",
+      "status": "running"
+    },
+    {
+      "ip": "123.111.1.3",
+      "name": "Service9",
+      "status": "running"
+    },
+    {
+      "ip": "123.111.1.3",
+      "name": "Service10",
+      "status": "running"
+    }
+  ],
+  "service": [
+    {
+      "id": 1,
+      "name": "Java"
+    },
+    {
+      "id": 2,
+      "name": "C"
+    },
+    {
+      "id": 3,
+      "name": ".net"
+    },
+    {
+      "id": 4,
+      "name": "React"
+    },
+    {
+      "id": 5,
+      "name": "Angular"
+    },
+    {
+      "id": 6,
+      "name": "Angular2"
+    },
+    {
+      "id": 7,
+      "name": "Struts"
+    },
+    {
+      "id": 8,
+      "name": "Struts2"
+    },
+    {
+      "id": 9,
+      "name": "Struts2"
+    },
+    {
+      "id": 10,
+      "name": "Strs2"
+    }
+  ]
+}

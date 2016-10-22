@@ -1,0 +1,21 @@
+{
+  "name": "tasker",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "Wave10 <wave10@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/wave10/appfabric",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "client",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "font-roboto": "^0.0.2"
+  }
+}
