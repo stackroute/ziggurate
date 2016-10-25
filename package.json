@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "main": "index.js",
   "scripts": {
-    "serve": "node serve",
+    "start": "node serve",
+    "serve": "node ./server/bin/www",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Wave10 <Wave10@gmail.com>",
@@ -15,9 +16,11 @@
     "babel-preset-es2015": "^6.16.0",
     "babel-preset-react": "^6.16.0",
     "babel-preset-stage-1": "^6.16.0",
+    "body-parser": "^1.15.2",
     "css-loader": "^0.25.0",
     "flexboxgrid": "^6.3.1",
     "material-ui": "^0.16.0-rc2",
+    "mongoose": "^4.6.5",
     "react": "^15.3.2",
     "react-router": "^2.8.1",
     "react-tap-event-plugin": "^1.0.0",

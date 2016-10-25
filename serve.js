@@ -13,8 +13,11 @@ const compiler = webpack(config);
 const server = new WebpackDevServer(compiler, {
   hot: true,
   contentBase: path.join(__dirname,'client'),
-  publicPath: config.output.publicPath
-  
+  publicPath: config.output.publicPath, 
+  setup: function(app){
+  	// require('./server/db.js');
+  	app.use(require('./server/api/api.router'));
+  }
 });
 
 server.listen(port);

@@ -10,7 +10,7 @@ class AuthenticationPage extends React.Component{
           <h3 style={{marginTop:'100px'}}>Click on the below button to login to your GitHub Account</h3>
           <img src="./components/AuthenticationPage/images.png" />
           <div className='row center-xs'>
-          <Link to='/apps' style={{textDecoration:'none'}}>
+          <Link to='nodedashboardpage' style={{textDecoration:'none'}}>
           <RaisedButton label="Login with GitHub" type="submit" primary={true} />
           </Link>
           </div>

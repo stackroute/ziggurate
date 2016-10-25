@@ -138,7 +138,7 @@
 							null,
 							_react2.default.createElement(
 								_reactRouter.Router,
-								{ history: _reactRouter.hashHistory },
+								{ history: _reactRouter.browserHistory },
 								_react2.default.createElement(_reactRouter.Route, { path: '/', component: _Login2.default }),
 								_react2.default.createElement(_reactRouter.Route, { path: '/apps', component: _Apps2.default }),
 								_react2.default.createElement(_reactRouter.Route, { path: '/services', component: _Services2.default }),
@@ -56799,7 +56799,7 @@
 			value: function render() {
 				return _react2.default.createElement(
 					'div',
-					{ className: 'container-fluid' },
+					null,
 					_react2.default.createElement(_NodeDashBoard2.default, null)
 				);
 			}
@@ -56921,7 +56921,7 @@
 	            { className: 'row center-xs' },
 	            _react2.default.createElement(
 	              _reactRouter.Link,
-	              { to: '/nodedashboardpage/nodegridlist' },
+	              { to: '/nodedashboardpage/nodecontainerlist' },
 	              _react2.default.createElement(_RaisedButton2.default, { backgroundColor: '#a4c639', label: 'Bring your own node', style: { marginTop: '10px', fontStyle: 'Roboto' }, icon: _react2.default.createElement(_add2.default, null) })
 	            ),
 	            _react2.default.createElement('br', null)
@@ -57080,14 +57080,12 @@
 				data: []
 			}, _this.getData = function () {
 				_jquery2.default.ajax({
-					url: '/nodes/all',
+					url: 'http://localhost:3000/node',
 					type: 'GET',
-					crossDomain: true,
-					datatype: 'jsonp',
+					datatype: 'JSON',
 					success: function (data) {
-
 						console.log(data);
-						// this.setState({data:data});
+						this.setState({ data: data });
 					}.bind(_this)
 
 				});
@@ -57101,7 +57099,7 @@
 			value: function render() {
 				return _react2.default.createElement(
 					'div',
-					{ className: 'container-fluid' },
+					null,
 					_react2.default.createElement(_NodesGridList2.default, { serviceListData: this.state.data })
 				);
 			}
@@ -58837,7 +58835,7 @@
 					list.push(_react2.default.createElement(_NodeContainerList2.default, { val: i, serviceListData: this.state.data[i] }));
 				}return _react2.default.createElement(
 					'div',
-					{ className: 'container-fluid' },
+					null,
 					_react2.default.createElement(_HomeAppBar2.default, null),
 					_react2.default.createElement(
 						_reactRouter.Link,
@@ -59053,7 +59051,7 @@
 	          subtitle: _react2.default.createElement(
 	            'span',
 	            null,
-	            'IPss ',
+	            'IP ',
 	            _react2.default.createElement(
 	              'b',
 	              null,
@@ -62718,7 +62716,7 @@
 	            { className: 'row center-xs' },
 	            _react2.default.createElement(
 	              _reactRouter.Link,
-	              { to: 'nodedashboardpage', style: { textDecoration: 'none' } },
+	              { to: '/apps', style: { textDecoration: 'none' } },
 	              _react2.default.createElement(_RaisedButton2.default, { label: 'Login with GitHub', type: 'submit', primary: true })
 	            )
 	          )

@@ -14,9 +14,12 @@ class ServiceReplicationCluster extends React.Component
 		return(<div className='row'>
 			<div className='row center-xs'>
 			{content}
+     <img src="components/NodeGridTile/SystemsNode3.jpg" width="100%" height="100%" />
+
 			</div>
 			</div>);
 	};
 };
+
 
 export default ServiceReplicationCluster;
