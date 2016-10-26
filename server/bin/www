@@ -1,105 +1,15 @@
-<<<<<<< HEAD
 var express = require('express');
 var app = express();
 var path=require('path');
 
 const PORT = process.env.PORT || 8080
 
-var request = require('request');
-var jwt = require('jsonwebtoken');
 
-app.use(express.static(path.join(__dirname,'..','public')));
+// app.use(express.static(path.join(__dirname,'..','public')));
 
-// app.use(express.static('client'));
+app.use(express.static('client'));
+app.use(require('../api/api.router'));
 
-
-
-app.get('/oauth/github', function(req, res) {
-
-    // GET code
-    var code = req.query.code;
-    console.log("Code is", code);
-
-    //Get access token
-    var tokenUrl = "https://github.com/login/oauth/access_token?client_id=f15e432f497c0eb37e47&client_secret=f4e8072e9f9a5b367aab1c9a0ecb641188787c97&code=" + code;
-    var accessToken ="";
-    request.post(tokenUrl,function(err, response, body) {
-    	if(err) { return "Error"; }
-    	accessToken = body.split('=')[1].split('&')[0];
-    	console.log("Access Token :",accessToken);
-
-
-
-       /* var options = { method: 'GET', url: 'https://api.github.com/user', qs: { access_token: accessToken },
-  		headers: {'cache-control': 'no-cache' ,'User-Agent':'request'}};
-
-		request(options, function (error, response, body) {
-	  if (error) throw new Error(error);
-
-	  console.log(body);*/
-
-	   //Get Userdata   
-	   var userDataUrl = "https://api.github.com/user?access_token="  +accessToken ;
-
-	   request.get({url:userDataUrl,headers:{'User-Agent':'request'}},function(err,response,body) {
-	   	if(err) { return "Error"; }
-	   	const userProfile = JSON.parse(body);
-	   	console.log("User",userProfile);
-
-
-	   	var adm=true;        
-	   	request.get({url:userProfile.organizations_url,headers:{'User-Agent':'request'}},function(err,response,data){
-	   		if(err) {
-	   			adm=false;
-	   			return "Error"; 
-	   		}
-	   		else
-	   		{
-	   			var org='';
-	   			if(data.length==2){
-	   				adm=false;
-	   			}
-	   			else{
-	   				for(var i=1;i<(data.length)-1;i++){
-	   					org+=data[i];
-	   				}
-	   				org=JSON.parse(org);
-
-	   				console.log(org)
-
-	   				console.log(org.login);
-
-	   				if(org.login == "Ziggurate")
-	   				{
-	   					adm=true;
-	   					console.log("I am admin");
-	   				}
-	   				else{
-	   					adm=false;
-	   					console.log("I am user");
-	   				}
-	   			}
-
-	   			var jwtToken = jwt.sign({"accesstoken": accessToken,"user":"github.com/"+userProfile.login ,"admin":adm},'my MERN project');
-	   			console.log("Generated jwtToken is:",jwtToken);
-	   			if(adm == true)
-	   			{
-	   				res.cookie('JWT',jwtToken,{maxAge:900000}).redirect('/#/nodedashboardpage');
-	   			}
-	   			else{
-	   				res.cookie('JWT',jwtToken,{maxAge:900000}).redirect('/#/apps');
-	   			}
-
-	   		}
- 		});
-
-
-
-
-	   });
-	});
-
-});
 
 app.listen(PORT,function(){
 	console.log('server listening');

@@ -12,7 +12,6 @@ class AuthenticationPage extends React.Component{
           <div className='row center-xs'>
         
           <RaisedButton label="Login with GitHub" type="submit" primary={true} href="https://github.com/login/oauth/authorize?client_id=f15e432f497c0eb37e47"/>
-         
           </div>
           </div>
           </div>
