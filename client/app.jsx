@@ -10,22 +10,25 @@ import NodeDashBoardPage from './views/NodeDashBoardPage';
 import NodeGridListPage from './views/NodeGridListPage';
 import NodeContainerPage from './views/NodeContainerPage';
 import Login from './views/Login';
-
+import $ from 'jquery';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import Flex from '../node_modules/flexboxgrid/css/flexboxgrid.css';
 
 injectTapEventPlugin();
 
 class App extends React.Component{
+	
+
 
 	render(){
+
 		return(
 			<div>
 			<MuiThemeProvider>
 			<div>
-			<Router history={browserHistory}>
-			<Route path='/' component={Login}/>
-			<Route path='/apps' component={Apps}/>
+			<Router history={hashHistory}>
+			<Route path='/' component={Login} />
+			<Route path='/apps' component={Apps}  />
 
 			<Route path='/services' component={Services} />
 			<Route path='/services/replication' component={Replications} />

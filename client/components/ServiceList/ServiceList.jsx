@@ -14,7 +14,7 @@ class ServiceList extends React.Component
    });
     return(<div>
       <div className='row'>
-      <Link to='/'>
+      <Link to='/apps'>
       <ActionHome color='black' hoverColor='#F44336' style={{height:'50px',width:'50px'}}/>
       </Link>
        </div>

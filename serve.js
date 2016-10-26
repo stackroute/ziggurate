@@ -3,7 +3,7 @@ const WebpackDevServer = require('webpack-dev-server');
 
 const path = require('path');
 
-const port = process.env.PORT || 8080
+const port = process.env.PORT || 8081
 
 const config = require('./webpack.config');
 config.entry.app.unshift('webpack-dev-server/client?http://localhost:'+port,'webpack/hot/dev-server');
