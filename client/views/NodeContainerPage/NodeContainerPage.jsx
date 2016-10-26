@@ -37,7 +37,7 @@ class NodeContainerPage extends React.Component{
 		var list=[];
 		for(var i in this.state.data)
 			list.push(<NodeContainerList val={i} serviceListData={this.state.data[i]} />);
-			return(<div>
+			return(<div className='container-fluid'>
 			<HomeAppBar />
 			<Link to='/'>
 			<ActionHome style={{width: '100px',height: '40px'}}/>

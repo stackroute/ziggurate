@@ -22,7 +22,7 @@ class NodeDashBoard extends React.Component
         </Paper>
         </div>
         <div className='row center-xs'>
-        <Link to='/nodedashboardpage/nodecontainerlist'>
+        <Link to='/nodedashboardpage/nodesclusterpage'>
         <RaisedButton backgroundColor="#a4c639" label="Bring your own node" style={{marginTop: '10px',fontStyle: 'Roboto'}} icon={<ContentAdd />} />
         </Link><br />
         </div>

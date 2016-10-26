@@ -1,10 +1,16 @@
+<<<<<<< HEAD
 var express = require('express');
 var app = express();
+var path=require('path');
+
+const PORT = process.env.PORT || 8080
 
 var request = require('request');
 var jwt = require('jsonwebtoken');
 
-app.use(express.static('client'));
+app.use(express.static(path.join(__dirname,'..','public')));
+
+// app.use(express.static('client'));
 
 
 
@@ -95,6 +101,6 @@ app.get('/oauth/github', function(req, res) {
 
 });
 
-app.listen(8080,function(){
+app.listen(PORT,function(){
 	console.log('server listening');
 });

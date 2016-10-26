@@ -97,10 +97,6 @@
 
 	var _Login2 = _interopRequireDefault(_Login);
 
-	var _jquery = __webpack_require__(382);
-
-	var _jquery2 = _interopRequireDefault(_jquery);
-
 	var _reactTapEventPlugin = __webpack_require__(548);
 
 	var _reactTapEventPlugin2 = _interopRequireDefault(_reactTapEventPlugin);
@@ -131,7 +127,6 @@
 		_createClass(App, [{
 			key: 'render',
 			value: function render() {
-
 				return _react2.default.createElement(
 					'div',
 					null,
@@ -143,7 +138,7 @@
 							null,
 							_react2.default.createElement(
 								_reactRouter.Router,
-								{ history: _reactRouter.hashHistory },
+								{ history: _reactRouter.browserHistory },
 								_react2.default.createElement(_reactRouter.Route, { path: '/', component: _Login2.default }),
 								_react2.default.createElement(_reactRouter.Route, { path: '/apps', component: _Apps2.default }),
 								_react2.default.createElement(_reactRouter.Route, { path: '/services', component: _Services2.default }),
@@ -62719,7 +62714,11 @@
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'row center-xs' },
-	            _react2.default.createElement(_RaisedButton2.default, { label: 'Login with GitHub', type: 'submit', primary: true, href: 'https://github.com/login/oauth/authorize?client_id=f15e432f497c0eb37e47' })
+	            _react2.default.createElement(
+	              _reactRouter.Link,
+	              { to: '/apps', style: { textDecoration: 'none' } },
+	              _react2.default.createElement(_RaisedButton2.default, { label: 'Login with GitHub', type: 'submit', primary: true })
+	            )
 	          )
 	        )
 	      );

@@ -11,7 +11,7 @@ class Apps extends React.Component{
 
 	getData = () => {
 		$.ajax({
-			url:'http://localhost:3000/app',    
+			url:'http://localhost:3000/app',
 			type:'GET',
 			datatype:'JSON',
 			success:function(data)

@@ -7,7 +7,7 @@ import Services from './views/Services';
 import Replications from './views/Replications';
 import Apps from './views/Apps';
 import NodeDashBoardPage from './views/NodeDashBoardPage';
-import NodeGridListPage from './views/NodeGridListPage';
+import NodesClusterPage from './views/NodesClusterPage';
 import NodeContainerPage from './views/NodeContainerPage';
 import Login from './views/Login';
 import $ from 'jquery';
@@ -27,14 +27,14 @@ class App extends React.Component{
 			<MuiThemeProvider>
 			<div>
 			<Router history={hashHistory}>
-			<Route path='/' component={Login} />
-			<Route path='/apps' component={Apps}  />
+			<Route path='/' component={Login}/>
+			<Route path='/apps' component={Apps}/>
 
 			<Route path='/services' component={Services} />
 			<Route path='/services/replication' component={Replications} />
 
 			<Route path='/nodedashboardpage' component={NodeDashBoardPage} />
-			<Route path='/nodedashboardpage/nodegridlist' component={NodeGridListPage} />
+			<Route path='/nodedashboardpage/nodesclusterpage' component={NodesClusterPage} />
 			<Route path='/nodedashboardpage/nodecontainerlist' component={NodeContainerPage} />
 			
 			

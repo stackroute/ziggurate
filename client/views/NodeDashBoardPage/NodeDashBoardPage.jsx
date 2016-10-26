@@ -6,7 +6,7 @@ import NodeDashBoard from '../../components/NodeDashBoard';
 class NodeDashBoardPage extends React.Component{
 
 	render(){
-		return(<div>
+		return(<div className='container-fluid'>
 				<NodeDashBoard/>
 				</div>
 			);
