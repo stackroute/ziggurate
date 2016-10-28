@@ -1,0 +1,11 @@
+---
+# tasks file for stackroute.docker-compose
+- name: Install Docker Compose
+  get_url:
+    url: https://github.com/docker/compose/releases/download/1.8.0/docker-compose-Linux-x86_64
+    dest: /usr/local/bin/docker-compose
+    group: root
+    owner: root
+    force: yes
+    mode: 0755
+    

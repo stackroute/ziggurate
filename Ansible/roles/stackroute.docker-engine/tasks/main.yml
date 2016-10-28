@@ -1,0 +1,30 @@
+---
+# tasks file for docker
+# - name: Purge older docker repositories
+#   apt:
+#     name: "{{item}}"
+#     state: absent
+#   with_items:
+#     - lxc-docker
+#     - docker.io
+- name: Install https support packages for apt
+  apt:
+    name: "{{item}}"
+    state: latest
+  with_items:
+    - apt-transport-https
+    - ca-certificates
+- name: Add Docker GPG Keys to apt
+  apt_key:
+    keyserver: hkp://p80.pool.sks-keyservers.net:80
+    id: 58118E89F3A912897C070ADBF76221572C52609D
+    state: present
+- name: Add Docker Repository
+  apt_repository:
+    repo: deb https://apt.dockerproject.org/repo ubuntu-xenial main
+    state: present
+    update_cache: yes
+- name: Install Docker Engine
+  apt:
+    name: docker-engine
+    state: present

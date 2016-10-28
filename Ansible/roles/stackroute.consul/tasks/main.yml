@@ -1,0 +1,7 @@
+---
+# tasks file for stackroute.counsl
+# - name: Install consul on machine
+- unarchive: src=../files/consul_0.7.0_linux_amd64.zip dest=/usr/local/bin creates=no mode=0755 owner=root group=root
+- file: path=/etc/consul.d state=directory
+
+ 
