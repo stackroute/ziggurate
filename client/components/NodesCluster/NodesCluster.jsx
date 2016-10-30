@@ -35,24 +35,21 @@ class NodesCluster extends React.Component{
 		let menuItems=this.props.dropdowndata.map(function(data,index)
 		{
 			return(
-				<MenuItem key={index}value={data} primaryText={data} />);		
+				<MenuItem key={index} value={data}  primaryText={data} />);		
 		});
 
 
 		let nodeCard= this.props.serviceListData.map(function(data,index){
 			var badgeColor='#D32F2F';
-			if(data.Status=='Alive')
+			if(data.status=='ready')
 				badgeColor='#4CAF50';
 
 			return(
-				<NodeCard color={badgeColor} key={index} tile={data}/> );
+				<NodeCard color={badgeColor} indexKey={index} key={data.id} cardContent={data}/> );
 		}.bind(this));
 		return(<div>
 
 			<div className='row end-xs'>
-			<Link to='/'>
-			<ActionHome style={{width: '100px',height: '60px'}}/>
-			</Link>
 			</div>
 			<div className='row first-xs'>
 			<SelectField autoWidth={true}

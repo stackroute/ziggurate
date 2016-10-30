@@ -1,18 +1,231 @@
-var fs=require('fs');
+var Docker=require('dockerode');
+
+var docker=new Docker({socketPath: '/var/run/docker.sock'});
+// var docker=new Docker({socketPath: '/var/run/docker.sock',host:'http://localhost',port:2375});
+
 var http=require('http');
 const Router=require('express').Router();
 
-var IpFile=fs.readFileSync('./server/api/nodes/Ips.txt','utf-8');
 
-var Ips=IpFile.split("\n");
+Router.get('/all',(req,res) =>{
+  getDataFromDocker(res,"all");
+});
+
+Router.get('/Swarm-Manager',(req,res) =>{
+  getDataFromDocker(res,"manager");
+});
+
+Router.get('/Swarm-Worker',(req,res) =>{
+  getDataFromDocker(res,"worker");
+});
+
+Router.get('/Swarm-Leader',(req,res) =>{
+  getDataFromDocker(res,"leader");
+});
+
+function getDataFromDocker(res,mode){
+  var info=docker.listNodes(function(err,data){
+   res.json(createJson(data,mode)); 
+ });
+}
+
+//This function will create the drop down list for the nodes page
+function createSelection(data){
+  var dockerDropDown=[];
+  for(let i=0;i<data.length;i++){
+    if(!dockerDropDown.includes(data[i]["Spec"]["Role"]))
+      dockerDropDown.push(data[i]["Spec"]["Role"]);
+
+    if(Object.keys(data[i]).includes("ManagerStatus"))
+    {
+      if(Object.keys(data[i]["ManagerStatus"]).includes("Leader"))
+      {
+        if(!dockerDropDown.includes("Swarm-Leader"))
+         dockerDropDown.push("Swarm-Leader"); 
+     }
+   }
+ }
+
+ for(let i=0;i<dockerDropDown.length;i++){
+  dockerDropDown[i]=dockerDropDown[i].replace("worker","Swarm-Worker");
+  dockerDropDown[i]=dockerDropDown[i].replace("manager","Swarm-Manager");
+};
+return dockerDropDown;
+};
 
 
-Router.get('/consul-Worker',(req,res) =>{
+
+//this function will return a json info for all swarm machines
+function createJson(data,mode){
+  let dockerSystems=[];
+  let dockerDropDown=createSelection(data);
+
+  for(let i=0;i<data.length;i++){
+    let dockerSystem={};
+
+ //this is for all systems   
+ if(mode=='all')
+ {
+  if(Object.keys(data[i]).includes("ManagerStatus")){
+    if(Object.keys(data[i]["ManagerStatus"]).includes("Leader"))
+      dockerSystem["role"]="Swarm Leader";
+    else
+      dockerSystem["role"]="Swarm Manager";
+  }
+  else
+   dockerSystem["role"]="Swarm Worker";
+}
+//all system ends here
+
+//this is for Leader
+if(mode=='leader')
+{
+  if(Object.keys(data[i]).includes("ManagerStatus")){
+    if(Object.keys(data[i]["ManagerStatus"]).includes("Leader"))
+      dockerSystem["role"]="Swarm Leader";
+    else
+      continue;
+  }
+  else
+    continue;
+}
+//Leader Ends here
+
+//this is for manager
+else if (mode=='manager')
+{
+  if(Object.keys(data[i]).includes("ManagerStatus")){
+    if(Object.keys(data[i]["ManagerStatus"]).includes("Leader"))
+      continue;
+    else
+      dockerSystem["role"]="Swarm Manager";
+  }
+  else
+    continue;
+}
+//manager ends here
+
+  //This is for the worker
+  else if(mode=='worker'){
+    if(Object.keys(data[i]).includes("ManagerStatus"))
+      continue;
+    else
+     dockerSystem["role"]="Swarm Worker";
+ }
+  //Worker end here
+
+  
+  if(data[i]["Status"]["State"]=='ready')
+    dockerSystem["status"]="ready";
+  else
+    dockerSystem["status"]="down";
+
+  dockerSystem["id"]=data[i]["ID"];
+  dockerSystem["name"]=data[i]["Description"]["Hostname"];
+  dockerSystem["createdAt"]=data[i]["CreatedAt"];
+  dockerSystem["updatedAt"]=data[i]["UpdatedAt"];
+  dockerSystem["dropDown"]=dockerDropDown;
+
+  dockerSystems.push(dockerSystem);
+};
+return dockerSystems;
+};
+
+
+module.exports=Router;
+
+
+
+
+
+
+
+
+
+
+
+
+//this will return a json info for swarm managers
+
+
+/*function createMangerJson(data){
+  let dockerSystems=[];
+  let dockerDropDown=createSelection(data);
+
+  for(let i=0;i<data.length;i++){
+    let dockerSystem={};
+    
+    if(Object.keys(data[i]).includes("ManagerStatus")){
+
+      if(Object.keys(data[i]["ManagerStatus"]).includes("Leader"))
+        dockerSystem["role"]="Swarm Leader";
+      else
+        dockerSystem["role"]="Swarm Manager";
+    }
+    else
+      continue;
+
+    if(data[i]["Status"]["State"]=='ready')
+      dockerSystem["status"]="ready";
+    else
+      dockerSystem["status"]="down";
+
+    dockerSystem["id"]=data[i]["ID"];
+    dockerSystem["name"]=data[i]["Description"]["Hostname"];
+    dockerSystem["createdAt"]=data[i]["CreatedAt"];
+    dockerSystem["updatedAt"]=data[i]["UpdatedAt"];
+    dockerSystem["dropDown"]=dockerDropDown;
+
+    dockerSystems.push(dockerSystem);
+  };
+  return dockerSystems;
+
+};
+
+
+//This function will return a json info for swarm workers and leader
+function createWorkerJson(data){
+  let dockerSystems=[];
+  let dockerDropDown=createSelection(data);
+
+  for(let i=0;i<data.length;i++){
+    let dockerSystem={};
+    
+    if(Object.keys(data[i]).includes("ManagerStatus")){
+
+      if(Object.keys(data[i]["ManagerStatus"]).includes("Leader"))
+        dockerSystem["role"]="Swarm Leader";
+      else
+        continue;
+    }
+    else
+     dockerSystem["role"]="Swarm Worker";
+
+   if(data[i]["Status"]["State"]=='ready')
+    dockerSystem["status"]="ready";
+  else
+    dockerSystem["status"]="down";
+
+  dockerSystem["id"]=data[i]["ID"];
+  dockerSystem["name"]=data[i]["Description"]["Hostname"];
+  dockerSystem["createdAt"]=data[i]["CreatedAt"];
+  dockerSystem["updatedAt"]=data[i]["UpdatedAt"];
+  dockerSystem["dropDown"]=dockerDropDown;
+
+  dockerSystems.push(dockerSystem);
+};
+return dockerSystems;
+
+};
+*/
+
+/*Router.get('/consul-Worker',(req,res) =>{
   consulApi(createConsulWorkerJson,res,0);
 });
 
 Router.get('/all',(req,res) =>{
-  consulApi(createConsulAllJson,res,0);
+  // consulApi(createConsulAllJson,res,0);
+  })
 });
 
 Router.get('/consul-Server',(req,res) =>{
@@ -24,7 +237,7 @@ Router.get('/consul-Server',(req,res) =>{
 function consulApi (callfunction,res,index){
    var options = {
     "method": "GET",
-    // "hostname": "192.168.2.7",
+    // "hostname": "172.23.238.236",
     "hostname": ""+Ips[index]+"",
     "port": "8500",
     "path": "/v1/agent/members",
@@ -158,5 +371,4 @@ function createConsulServerJson(body){
 };
 return consulWorkerArray;
 };
-
-module.exports=Router;
+*/

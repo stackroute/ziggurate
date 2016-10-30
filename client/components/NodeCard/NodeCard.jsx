@@ -14,25 +14,23 @@ class NodeCard extends React.Component{
     };
     render(){
         return(
-            <Paper zDepth={3} style={{marginLeft:'10px',marginTop:'15px',width:'350px'}}>
+            <Paper zDepth={3} style={{marginLeft:'15px',marginTop:'10px',width:'350px'}}>
             <Card expanded={true}>
             <CardHeader
-            title={this.props.tile.Name}
-            titleStyle={{fontSize:'24px'}}
+            title={this.props.cardContent.name}
+            titleStyle={{fontSize:'25px'}}
             avatar={<Badge badgeContent={''} primary={true} badgeStyle={{background:this.state.color,right:'20px',top:'5px'}}/>}
             style={{fontWeight:'bold',background:'Grey'}}
             />
+
             <CardText expandable={true}>
             <List>
             <ListItem 
-            key={this.props.tile.Addr}
+            key={this.props.cardContent.role}
             style={{fontSize:'20px'}} 
-            primaryText={"Ip:"+this.props.tile.Ip+":"+this.props.tile.Port} />
-            <ListItem 
-            key={this.props.tile.Role}
-            style={{fontSize:'20px'}} 
-            primaryText={"Role:"+this.props.tile.Role} />
+            primaryText={"Role:"+this.props.cardContent.role} />
             </List>
+
             <Divider />
             </CardText>
             <CardActions>
