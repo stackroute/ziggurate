@@ -7,6 +7,9 @@ import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import $ from 'jquery';
 
+
+import request from 'superagent';
+
 class NodeContainerPage extends React.Component{
 
 
@@ -19,7 +22,7 @@ class NodeContainerPage extends React.Component{
 
 	getData = () => {
 		$.ajax({
-			url:'http://localhost:3000/nodes',
+			url:'/nodes',
 			type:'GET',
 			datatype:'JSON',
 			success: function(data){

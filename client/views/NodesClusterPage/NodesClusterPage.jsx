@@ -22,14 +22,11 @@ class NodesClusterPage extends React.Component{
 			type:'GET',
 			datatype:'json',
 			success: function(data){
-				this.setState({dropdown:data[0]["Array"]});
+				this.setState({dropdown:data[0]["dropDown"]});
 				this.setState({data:data});
 			}.bind(this)
-
-
 		});
 	}
-
 	componentDidMount = () =>{
 		this.getData("all");
 	}

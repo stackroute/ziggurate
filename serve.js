@@ -15,7 +15,6 @@ const server = new WebpackDevServer(compiler, {
   contentBase: path.join(__dirname,'client'),
   publicPath: config.output.publicPath, 
   setup: function(app){
-  	// require('./server/db.js');
   	app.use(require('./server/api/api.router'));
   }
 });
