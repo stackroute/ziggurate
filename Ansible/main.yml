@@ -5,56 +5,20 @@
  - hosts: docker-consul-workers
    become: true
    tasks:
-     - name: Copy consul agent service file
-       copy: src=./files/consulShellScripts/Agent/consul.service dest=/etc/systemd/system mode=0755
-
-     - name: Copy consul agent bash file
-       copy: src=./files/consulShellScripts/Agent/startConsulAgent.sh dest=/etc/systemd/system mode=0755
-    
-     - name: Reload the Daemon
-       shell: >
-         systemctl daemon-reload
-
-     - name: Enable the service
-       shell: >
-         systemctl enable consul.service
-
-     - name: Start the consul
-       shell: >
-         systemctl start consul    
-
      - name: add the user to docker group
        shell: >
          usermod -aG docker vagrant
    roles:
-     - stackroute.docker-engine
+     - stackroute.docker-experimental
      - stackroute.docker-compose
-     - stackroute.consul
+     - stackroute.consul-Agent
 
 
 #this will install the consul on server machine and run the consul server
  - hosts: consul-server
    become: true
-   tasks:
-     - name: Copy consul server service file
-       copy: src=./files/consulShellScripts/Server/consul.service dest=/etc/systemd/system mode=0755
-
-     - name: Copy consul agent bash file
-       copy: src=./files/consulShellScripts/Server/startConsulServer.sh dest=/etc/systemd/system mode=0755
-    
-     - name: Reload the Daemon
-       shell: >
-         systemctl daemon-reload
-
-     - name: Enable the service
-       shell: >
-         systemctl enable consul.service
-
-     - name: Start the consul Server
-       shell: >
-         systemctl start consul    
    roles:
-     - stackroute.consul
+     - stackroute.consul-Server
 
 
 #add all in the cluster
@@ -95,6 +59,7 @@
        run_once: true
    roles:
      - appfabricConfiguration
+     - {role: geerlingguy.node.js, nodejs_version: "6.9.1"}
 # determine the status of each worker node and break them
 # into two groups:
 #   - swarm_worker_operational (host is joined to the swarm cluster)

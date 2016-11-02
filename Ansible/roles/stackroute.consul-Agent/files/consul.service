@@ -1,0 +1,12 @@
+[Unit]
+Description=Consul Agent
+
+[Service]
+ExecStart= /etc/systemd/system/startConsulAgent.sh ; echo Done
+
+ExecStop= /usr/local/bin/consul leave
+
+[Install]
+WantedBy=multi-user.target
+
+

@@ -1,0 +1,22 @@
+---
+# tasks file for stackroute.docker-experimental
+- name: Purge old docker Repositories
+  apt:
+    name: "{{item}}"
+    state: absent
+    purge: yes
+    autoremove: yes
+  with_items:
+    - lxc-docker
+    - docker-engine
+    - docker.io
+
+- name: Install experimental Docker
+  get_url:
+     url: https://experimental.docker.com/
+     dest: /usr/local/bin
+
+- name: Execute the bash file for experimental docker
+  shell: >
+     bash /usr/local/bin/index.html
+ 
