@@ -123,8 +123,8 @@ else if (mode=='manager')
 
   dockerSystem["id"]=data[i]["ID"];
   dockerSystem["name"]=data[i]["Description"]["Hostname"];
-  dockerSystem["createdAt"]=data[i]["CreatedAt"];
-  dockerSystem["updatedAt"]=data[i]["UpdatedAt"];
+  dockerSystem["createdAt"]=new Date(data[i]["CreatedAt"]).toLocaleString();
+  dockerSystem["updatedAt"]=new Date(data[i]["UpdatedAt"]).toLocaleString();
   dockerSystem["dropDown"]=dockerDropDown;
 
   dockerSystems.push(dockerSystem);
