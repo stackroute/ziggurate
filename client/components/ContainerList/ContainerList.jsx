@@ -4,10 +4,15 @@ import ContainerCard from '../ContainerCard'
 
 class ContainerList extends React.Component
 {
+
+
   render() {
     var containercard = this.props.containerListData.map(function(value,index){
-     return(<ContainerCard value={value} id={index+1} key={index}/>);
-   });
+     var colour='#4CAF50';
+      if(value.desiredState=='shutdown')
+        colour='#F44336';
+     return(<ContainerCard value={value} color={colour} id={index+1} key={index}/>);
+   }.bind(this));
     
     return(<div>
       <div className='row center-xs'>

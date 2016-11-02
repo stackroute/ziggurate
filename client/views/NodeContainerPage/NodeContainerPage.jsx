@@ -3,10 +3,11 @@ import HomeAppBar from '../../components/HomeAppBar';
 import ContainerList from '../../components/ContainerList';
 import {Link} from 'react-router';
 import ActionHome from 'material-ui/svg-icons/action/home';
-import $ from 'jquery';
-
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
+
+import $ from 'jquery';
+
 
 class NodeContainerPage extends React.Component{
 
@@ -50,7 +51,7 @@ class NodeContainerPage extends React.Component{
 		const actions = [
 		<Link to='/nodesclusterpage'>
 		<FlatButton
-		label="Cancel"
+		label="Ok"
 		primary={true}
 		onTouchTap={this.handleClose}
 		/></Link>
@@ -67,9 +68,9 @@ class NodeContainerPage extends React.Component{
 			</div>
 			<ContainerList 
 			nodeName={this.props.params.nodeName} 
-			containerListData={this.state.data} />
+			containerListData={this.state.data}/>
 			<Dialog
-			title={"Containers on"+this.props.params.nodeName}
+			title={"Containers on "+this.props.params.nodeName}
 			actions={actions}
 			modal={false}
 			open={this.state.open}>

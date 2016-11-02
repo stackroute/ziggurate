@@ -1,6 +1,4 @@
 import React,{Component} from 'react';
-import {Link} from 'react-router';
-import ActionHome from 'material-ui/svg-icons/action/home';
 import HomeAppBar from '../HomeAppBar';
 import Divider from 'material-ui/Divider';
 import NodeCard from '../NodeCard';
