@@ -59,7 +59,7 @@
        run_once: true
    roles:
      - appfabricConfiguration
-     - {role: geerlingguy.node.js, nodejs_version: "6.9.1"}
+     - {role: geerlingguy.nodejs, nodejs_version: "6.9.1"}
 # determine the status of each worker node and break them
 # into two groups:
 #   - swarm_worker_operational (host is joined to the swarm cluster)

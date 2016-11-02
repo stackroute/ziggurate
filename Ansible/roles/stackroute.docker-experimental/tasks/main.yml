@@ -4,19 +4,48 @@
   apt:
     name: "{{item}}"
     state: absent
-    purge: yes
     autoremove: yes
   with_items:
     - lxc-docker
     - docker-engine
     - docker.io
 
-- name: Install experimental Docker
-  get_url:
-     url: https://experimental.docker.com/
-     dest: /usr/local/bin
+# - name: Install experimental Docker
+#   get_url:
+#      url: https://experimental.docker.com/
+#      dest: /usr/local/bin
 
-- name: Execute the bash file for experimental docker
-  shell: >
-     bash /usr/local/bin/index.html
- 
+# - name: Execute the bash file for experimental docker
+#   shell: >
+#      bash /usr/local/bin/index.html
+
+- name: Install https support packages for apt
+  apt:
+    name: "{{item}}"
+    state: latest
+  with_items:
+    - apt-transport-https
+    - ca-certificates
+
+
+- name: Add docker GPG Keys to apt 
+  apt_key: 
+    keyserver: hkp://{{item}}:80
+    id: 58118E89F3A912897C070ADBF76221572C52609D
+    state: present
+  with_items:
+    # - ha.pool.sks-keyservers.net
+    - pgp.mit.edu
+    - keyserver.ubuntu.com
+
+- name: Add Docker Repository
+  apt_repository: 
+    repo: deb https://apt.dockerproject.org/repo ubuntu-xenial experimental
+    state: present
+    update_cache: yes 
+
+- name: Install Docker Engine
+  apt:
+    name: docker-engine
+    state: present
+   
