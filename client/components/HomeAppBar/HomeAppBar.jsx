@@ -12,7 +12,7 @@ class HomeAppBar extends React.Component{
 			<AppBar
 			title="Ziggurate"
 			iconElementLeft={<IconButton />}
-			iconElementRight={<Link to='/'><ActionExitToApp  style={{width:'60px',height:'40px'}}/></Link>}
+			iconElementRight={<Link to='/'><ActionExitToApp  style={{width:'60px',height:'40px',color:'white'}}/></Link>}
 			/>);
 	}
 };

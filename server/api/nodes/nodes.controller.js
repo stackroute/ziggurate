@@ -123,253 +123,43 @@ else if (mode=='manager')
 
   dockerSystem["id"]=data[i]["ID"];
   dockerSystem["name"]=data[i]["Description"]["Hostname"];
-  dockerSystem["createdAt"]=new Date(data[i]["CreatedAt"]).toLocaleString();
-  dockerSystem["updatedAt"]=new Date(data[i]["UpdatedAt"]).toLocaleString();
+  dockerSystem["createdAt"]=calculateTime(new Date(data[i]["CreatedAt"]).toLocaleString());    
+  dockerSystem["updatedAt"]=calculateTime(new Date(data[i]["CreatedAt"]).toLocaleString());
   dockerSystem["dropDown"]=dockerDropDown;
-
   dockerSystems.push(dockerSystem);
 };
 return dockerSystems;
+};
+
+
+function calculateTime(data){
+var date = new Date(data);
+var today=new Date();
+if(today.getYear() - date.getYear() >0){
+  return(today.getYear()-date.getYear()+" years ago");
+}
+else if(today.getMonth() - date.getMonth()>0){
+  return(today.getMonth()-date.getMonth()+" months ago"); 
+}
+else if(today.getDate() - date.getDate()>0){
+  if(today.getDate() - date.getDate()==1){
+    return("yesterday");}
+    else
+      return(today.getDate() - date.getDate()," days ago");
+  }
+else{
+  if(today.getHours() - date.getHours() ==1 && today.getMinutes() - date.getMinutes() >0)
+  return(today.getHours() - date.getHours()+" hours ago");
+
+  else if(today.getHours() - date.getHours() >1){
+    return(today.getHours() - date.getHours()+" hours ago");
+  }
+  else{
+    return(today.getMinutes()- date.getMinutes()+" minutes ago");
+
+  }
+}
 };
 
 
 module.exports=Router;
-
-
-
-
-
-
-
-
-
-
-
-
-//this will return a json info for swarm managers
-
-
-/*function createMangerJson(data){
-  let dockerSystems=[];
-  let dockerDropDown=createSelection(data);
-
-  for(let i=0;i<data.length;i++){
-    let dockerSystem={};
-    
-    if(Object.keys(data[i]).includes("ManagerStatus")){
-
-      if(Object.keys(data[i]["ManagerStatus"]).includes("Leader"))
-        dockerSystem["role"]="Swarm Leader";
-      else
-        dockerSystem["role"]="Swarm Manager";
-    }
-    else
-      continue;
-
-    if(data[i]["Status"]["State"]=='ready')
-      dockerSystem["status"]="ready";
-    else
-      dockerSystem["status"]="down";
-
-    dockerSystem["id"]=data[i]["ID"];
-    dockerSystem["name"]=data[i]["Description"]["Hostname"];
-    dockerSystem["createdAt"]=data[i]["CreatedAt"];
-    dockerSystem["updatedAt"]=data[i]["UpdatedAt"];
-    dockerSystem["dropDown"]=dockerDropDown;
-
-    dockerSystems.push(dockerSystem);
-  };
-  return dockerSystems;
-
-};
-
-
-//This function will return a json info for swarm workers and leader
-function createWorkerJson(data){
-  let dockerSystems=[];
-  let dockerDropDown=createSelection(data);
-
-  for(let i=0;i<data.length;i++){
-    let dockerSystem={};
-    
-    if(Object.keys(data[i]).includes("ManagerStatus")){
-
-      if(Object.keys(data[i]["ManagerStatus"]).includes("Leader"))
-        dockerSystem["role"]="Swarm Leader";
-      else
-        continue;
-    }
-    else
-     dockerSystem["role"]="Swarm Worker";
-
-   if(data[i]["Status"]["State"]=='ready')
-    dockerSystem["status"]="ready";
-  else
-    dockerSystem["status"]="down";
-
-  dockerSystem["id"]=data[i]["ID"];
-  dockerSystem["name"]=data[i]["Description"]["Hostname"];
-  dockerSystem["createdAt"]=data[i]["CreatedAt"];
-  dockerSystem["updatedAt"]=data[i]["UpdatedAt"];
-  dockerSystem["dropDown"]=dockerDropDown;
-
-  dockerSystems.push(dockerSystem);
-};
-return dockerSystems;
-
-};
-*/
-
-/*Router.get('/consul-Worker',(req,res) =>{
-  consulApi(createConsulWorkerJson,res,0);
-});
-
-Router.get('/all',(req,res) =>{
-  // consulApi(createConsulAllJson,res,0);
-  })
-});
-
-Router.get('/consul-Server',(req,res) =>{
-  consulApi(createConsulServerJson,res,0);
-});
-
-//Function get the Response From Consul API
-
-function consulApi (callfunction,res,index){
-   var options = {
-    "method": "GET",
-    // "hostname": "172.23.238.236",
-    "hostname": ""+Ips[index]+"",
-    "port": "8500",
-    "path": "/v1/agent/members",
-    "headers": {
-      "cache-control": "no-cache"
-    }
-  };
-
-  var req1 = http.request(options, function (res1) {
-    var chunks = [];
-    
-    res1.on("data",(chunk) =>{
-      chunks.push(chunk);
-    });
-
-
-    res1.on("end",() =>{
-      var body = Buffer.concat(chunks).toString();
-      body=JSON.parse(body);
-      index=0;
-      res.json(callfunction(body));
-    });
-
-  });
-  req1.end(); 
-
-  req1.on("error",(error) =>{
-    var newIndex=index+1;
-   consulApi(callfunction,res,newIndex);
-  });
-
-};
-
-function createSelection(body){
-  var consulArray=[];
-  for(let i=0;i<body.length;i++){
-    if(!consulArray.includes(body[i]["Tags"]["role"]))
-    {
-      consulArray.push(body[i]["Tags"]["role"]);
-    }
-  }
-
-  for(let i=0;i<consulArray.length;i++){
-    consulArray[i]=consulArray[i].replace("consul","Consul-Server");
-    consulArray[i]=consulArray[i].replace("node","Consul-Worker");
-  };
-
-  return consulArray;
-};
-
-//To Create Json for whole Cluster of consul
-
-function createConsulAllJson(body){
-  var consulWorkerArray=[];
-  var arr=createSelection(body);
-
-  for(let i=0;i<body.length;i++){
-    var consulWorker={};
-    if(body[i]["Status"]==3)
-      continue;
-    if(body[i]["Status"]==4)
-      consulWorker["Status"]="Failed";
-    else if(body[i]["Status"]==1)
-      consulWorker["Status"]="Alive";
-    if(body[i]["Tags"]["role"]=="consul")
-      consulWorker["Role"]="Consul Server";
-    else if(body[i]["Tags"]["role"]=="node")
-      consulWorker["Role"]="Consul Worker";
-    consulWorker["Name"]=body[i]["Name"];
-    consulWorker["Ip"]=body[i]["Addr"];
-    consulWorker["Port"]=body[i]["Port"];
-    consulWorker["Array"]=arr;
-    consulWorkerArray.push(consulWorker);
-  };
-  return consulWorkerArray;
-};
-
-// THis will create the Json For consul Workers Only
-function createConsulWorkerJson(body){
- var arr=createSelection(body);
-
- var consulWorkerArray=[];
- for(let i=0;i<body.length;i++){
-  var consulWorker={};
-  if(body[i]["Status"]==3)
-    continue;
-  if(body[i]["Status"]==4)
-    consulWorker["Status"]="Failed";
-  else if(body[i]["Status"]==1)
-    consulWorker["Status"]="Alive";
-
-  if(body[i]["Tags"]["role"]=="consul")
-    continue;
-  else if(body[i]["Tags"]["role"]=="node")
-    consulWorker["Role"]="Consul Worker";
-  consulWorker["Name"]=body[i]["Name"];
-  consulWorker["Ip"]=body[i]["Addr"];
-  consulWorker["Port"]=body[i]["Port"];
-  consulWorker["Array"]=arr;
-
-  consulWorkerArray.push(consulWorker);
-};
-return consulWorkerArray;
-};
-
-//This will create the Consul Server Json
-
-function createConsulServerJson(body){
- var arr=createSelection(body);
- var consulWorkerArray=[];
- for(let i=0;i<body.length;i++){
-  var consulWorker={};
-  if(body[i]["Status"]==3)
-    continue;
-  if(body[i]["Status"]==4)
-    consulWorker["Status"]="Failed";
-  else if(body[i]["Status"]==1)
-    consulWorker["Status"]="Alive";
-
-  if(body[i]["Tags"]["role"]=="consul")
-    consulWorker["Role"]="Consul Server";
-  else if(body[i]["Tags"]["role"]=="node")
-    continue;
-
-  consulWorker["Name"]=body[i]["Name"];
-  consulWorker["Ip"]=body[i]["Addr"];
-  consulWorker["Port"]=body[i]["Port"];
-  consulWorker["Array"]=arr;
-
-  consulWorkerArray.push(consulWorker);
-};
-return consulWorkerArray;
-};
-*/
