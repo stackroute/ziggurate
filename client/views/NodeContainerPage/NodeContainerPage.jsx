@@ -1,58 +1,82 @@
 import React,{Component} from 'react';
 import HomeAppBar from '../../components/HomeAppBar';
-import NodeContainerList from '../../components/NodeContainerList';
+import ContainerList from '../../components/ContainerList';
 import {Link} from 'react-router';
 import ActionHome from 'material-ui/svg-icons/action/home';
-import SelectField from 'material-ui/SelectField';
-import MenuItem from 'material-ui/MenuItem';
 import $ from 'jquery';
 
-
-import request from 'superagent';
+import Dialog from 'material-ui/Dialog';
+import FlatButton from 'material-ui/FlatButton';
 
 class NodeContainerPage extends React.Component{
 
-
 	state={
-		data:{},
-		value:1
+		data:[],
+		open:false
 	};
 
-	handleChange = (event, index, value) => this.setState({value});
-
-	getData = () => {
+	getData = (filter) => {
 		$.ajax({
-			url:'/nodes',
-			type:'GET',
-			datatype:'JSON',
+			url:'/containers/node',
+			type:'POST',
+			dataType:'json',
+			contentType: 'application/json',
+			data: JSON.stringify({nodeId:filter}),
 			success: function(data){
-				this.setState({data:data[0]});
+				console.log(data);
+				for(var key in data)
+				{
+					if(key=='state')
+					this.setState({open:true});
+					else
+					this.setState({data:data});
+
+				}
 			}.bind(this)
 
 		});
 	}
 
+	handleClose =() =>{
+		this.setState({open:false});
+
+	}
+
 	componentDidMount = () =>{
-		this.getData();
+		this.getData(this.props.params.nodeId);
 	}
 
 	render(){
-		var list=[];
-		for(var i in this.state.data)
-			list.push(<NodeContainerList val={i} serviceListData={this.state.data[i]} />);
-			return(<div className='container-fluid'>
+		const actions = [
+		<Link to='/nodesclusterpage'>
+		<FlatButton
+		label="Cancel"
+		primary={true}
+		onTouchTap={this.handleClose}
+		/></Link>
+		,
+		];
+
+		return(<div>
 			<HomeAppBar />
-			<Link to='/'>
-			<ActionHome style={{width: '100px',height: '40px'}}/>
+			<div className='container-fluid'>
+			<div className='row end-xs'>
+			<Link to='/nodesclusterpage'>
+			<ActionHome style={{width: '100px',height: '50px'}}/>
 			</Link>
-			<div className='row center-xs'>
-			<SelectField value={this.state.value} onChange={this.handleChange}>
-         	 <MenuItem value={1} primaryText="Filter By" />
-	         <MenuItem value={2} primaryText="Apps" />
-	         <MenuItem value={3} primaryText="All" />
-	        </SelectField>
-	        </div>
-			{list}
+			</div>
+			<ContainerList 
+			nodeName={this.props.params.nodeName} 
+			containerListData={this.state.data} />
+			<Dialog
+			title={"Containers on"+this.props.params.nodeName}
+			actions={actions}
+			modal={false}
+			open={this.state.open}>
+			There are no containers running on this node
+			</Dialog>
+
+			</div>
 			</div>
 			);
 	}

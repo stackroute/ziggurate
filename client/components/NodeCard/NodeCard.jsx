@@ -6,7 +6,7 @@ import Divider from 'material-ui/Divider';
 import {red500, yellow500, blue500} from 'material-ui/styles/colors';
 import Badge from 'material-ui/Badge';
 import Paper from 'material-ui/Paper';
-
+import {Link} from 'react-router';
 
 class NodeCard extends React.Component{
 	state = {
@@ -34,8 +34,11 @@ class NodeCard extends React.Component{
             <Divider />
             </CardText>
             <CardActions>
+            <Link to={'/nodesclusterpage/'+this.props.cardContent.id+'/'+this.props.cardContent.name}>
             <FlatButton label="More.." secondary={true} onTouchTap={this.handleOpen} style={{marginLeft:'70%'}}/>
+            </Link>
             </CardActions>
+
             </Card>
             </Paper>
             );

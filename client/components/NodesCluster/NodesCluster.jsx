@@ -43,7 +43,6 @@ class NodesCluster extends React.Component{
 			var badgeColor='#D32F2F';
 			if(data.status=='ready')
 				badgeColor='#4CAF50';
-
 			return(
 				<NodeCard color={badgeColor} indexKey={index} key={data.id} cardContent={data}/> );
 		}.bind(this));
