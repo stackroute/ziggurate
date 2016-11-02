@@ -1,6 +1,6 @@
 var Docker=require('dockerode');
 
-var docker=new Docker({socketPath: '/var/run/docker.sock'});
+var docker=new Docker({socketPath: '/var/run/docker.sock',host:'http://192.168.3.2',port:2375});
 // var docker=new Docker({socketPath: '/var/run/docker.sock',host:'http://localhost',port:2375});
 
 var http=require('http');
@@ -25,6 +25,7 @@ Router.get('/Swarm-Leader',(req,res) =>{
 
 function getDataFromDocker(res,mode){
   var info=docker.listNodes(function(err,data){
+    console.log(data);
    res.json(createJson(data,mode)); 
  });
 }

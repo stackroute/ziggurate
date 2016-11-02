@@ -5,7 +5,6 @@ const Router=require('express').Router();
 
 
 Router.get('/login',function(req,res){
-
 	
 	res.send("https://github.com/login/oauth/authorize?client_id="+config.GITHUB_CLIENT_ID);	
 });
