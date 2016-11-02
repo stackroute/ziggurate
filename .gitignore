@@ -4,3 +4,6 @@ npm-debug.log
 
 dev.js
 production.js
+
+*.dab
+

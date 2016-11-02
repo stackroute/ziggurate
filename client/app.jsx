@@ -34,8 +34,9 @@ class App extends React.Component{
 			<Route path='/services/replication' component={Replications} />
 
 			<Route path='/abc' component={NodeDashBoardPage} />
+
 			<Route path='/nodesclusterpage' component={NodesClusterPage} />
-			<Route path='/nodesclusterpage/nodecontainerlist' component={NodeContainerPage} />
+			<Route path='/nodesclusterpage/:nodeId/:nodeName' component={NodeContainerPage} />
 			</Router>
 			</div>
 			</MuiThemeProvider>
