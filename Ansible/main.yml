@@ -13,13 +13,11 @@
      - stackroute.docker-compose
      - stackroute.consul-Agent
 
-
 #this will install the consul on server machine and run the consul server
  - hosts: consul-server
    become: true
    roles:
      - stackroute.consul-Server
-
 
 #add all in the cluster
  - hosts: docker-consul-workers
@@ -59,7 +57,8 @@
        run_once: true
    roles:
      - appfabricConfiguration
-     - {role: geerlingguy.nodejs, nodejs_version: "6.9.1"}
+     - { role: geerlingguy.nodejs, nodejs_version: "6.x" }
+
 # determine the status of each worker node and break them
 # into two groups:
 #   - swarm_worker_operational (host is joined to the swarm cluster)
