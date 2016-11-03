@@ -24,7 +24,6 @@ class NodeContainerPage extends React.Component{
 			contentType: 'application/json',
 			data: JSON.stringify({nodeId:filter}),
 			success: function(data){
-				console.log(data);
 				for(var key in data)
 				{
 					if(key=='state')

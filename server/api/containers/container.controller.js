@@ -2,7 +2,7 @@ const Router=require('express').Router();
 
 var Docker=require('dockerode');
 
-var docker=new Docker({socketPath: '/var/run/docker.sock',host:'http://192.168.3.2',port:2375,});
+var docker=new Docker({socketPath: '/var/run/docker.sock'});
 
 Router.post('/node',(req,res) =>{
 	var tasks=docker.listTasks({filters:{'node':[req.body['nodeId']]}},function(err,data)
@@ -34,8 +34,11 @@ else{
 		return(today.getHours() - date.getHours()+" hours ago");
 	}
 	else{
-		return(today.getMinutes()- date.getMinutes()+" minutes ago");
-
+		if(today.getMinutes()-date.getMinutes() <0)
+		return((today.getMinutes()-date.getMinutes() + 60)+" minutes ago");
+		else 
+		return((today.getMinutes()-date.getMinutes() )+" minutes ago");
+			
 	}
 }
 };
