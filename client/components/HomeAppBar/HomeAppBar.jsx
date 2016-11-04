@@ -1,20 +1,97 @@
-import React,{Component} from 'react';
+import React from 'react';
+import cookie from 'react-cookie';
+import request from 'superagent';
+
 import AppBar from 'material-ui/AppBar';
-import {Link} from 'react-router';
+import Drawer from 'material-ui/Drawer';
+import MenuItem from 'material-ui/MenuItem';
+import Avatar from 'material-ui/Avatar';
 import ActionExitToApp from 'material-ui/svg-icons/action/exit-to-app';
-import IconButton from 'material-ui/IconButton';
+import HardwareDesktopWindows from 'material-ui/svg-icons/hardware/desktop-windows';
 
-class HomeAppBar extends React.Component{
-	
-
-	render(){
-		return(
-			<AppBar
-			title="Ziggurate"
-			iconElementLeft={<IconButton />}
-			iconElementRight={<Link to='/'><ActionExitToApp  style={{width:'60px',height:'40px',color:'white'}}/></Link>}
-			/>);
-	}
+const styles = {
+  drawerAvatar: {
+    textAlign: 'center'
+  },
+  avatar: {
+    marginTop: '13px'
+  }
 };
 
-export default HomeAppBar;
+export default class HomeAppBar extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      drawerOpen: false
+    };
+  }
+
+  static get contextTypes() {
+    return {
+      router: React.PropTypes.object.isRequired
+    };
+  }
+
+  componentDidMount() {
+    const setUserInState = () => {
+      this.setState({
+        user: JSON.parse(localStorage.user)
+      });
+    };
+
+    if(!localStorage.user) {
+      request
+        .get('/api/v1/auth/github/me')
+        .end(function(err, response) {
+          if(err) { throw err; }
+          localStorage.user = JSON.stringify(response.body);
+          setUserInState();
+        });
+    } else {
+      setUserInState();
+    }
+  }
+
+  handleLogout() {
+    delete localStorage.user;
+    cookie.remove('token');
+    this.context.router.push('/');
+  }
+
+  render() {
+    return (
+      <div>
+        <AppBar
+          title="Ziggurate"
+          onLeftIconButtonTouchTap={() => { this.setState({drawerOpen: true}); }}
+        />
+        <Drawer
+          open={this.state.drawerOpen}
+          docked={false}
+          onRequestChange={() => { this.setState({drawerOpen: false}); }}
+          style={styles.drawer} >
+            <div style={styles.drawerAvatar}>
+            { this.state.user ?
+              <Avatar src={this.state.user.avatar_url} size={230} style={styles.avatar}/> :
+              null }
+            </div>
+            <MenuItem
+              leftIcon={<HardwareDesktopWindows />}
+              onTouchTap={() => { this.context.router.push('/deploy'); }}>
+                Deploy
+            </MenuItem>
+            <MenuItem
+              leftIcon={<HardwareDesktopWindows />}
+              onTouchTap={() => { this.context.router.push('/apps'); }}>
+                Apps
+            </MenuItem>
+            <MenuItem
+              leftIcon={<ActionExitToApp />}
+              onTouchTap={this.handleLogout.bind(this)}>
+                Logout
+            </MenuItem>
+        </Drawer>
+      </div>
+    );
+  }
+}

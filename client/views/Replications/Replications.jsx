@@ -1,32 +1,32 @@
-import React,{Component} from 'react';
+import React from 'react';
 import ServiceReplicationCluster from '../../components/ServiceReplicationCluster';
 import ServiceReplicationInstances from '../../components/ServiceReplicationInstances';
 import HomeAppBar from '../../components/HomeAppBar';
 import $ from 'jquery';
 
-class Replications extends React.Component{
+class Replications extends React.Component {
 
 	state={
-		data:[]
+		data: []
 	};
 
   getData = () => {
     $.ajax({
-      url:'http://localhost:3000/replica',
-      type:'GET',
-      datatype:'JSON',
-      success: function(data){
-        this.setState({data:data});
+      url: 'http://localhost:3000/replica',
+      type: 'GET',
+      datatype: 'JSON',
+      success: function(data) {
+        this.setState({data: data});
       }.bind(this)
 
     });
   }
-
-  componentDidMount = () =>{
-  	this.getData();
+ componentDidMount = () => {
+   this.getData();
   }
- 	render(){
-		return(
+
+ render() {
+  return(
 				<div >
 				<HomeAppBar />
         <div className='container-fluid'>
@@ -36,6 +36,6 @@ class Replications extends React.Component{
         </div>
 			);
 	}
-};
+}
 
 export default Replications;

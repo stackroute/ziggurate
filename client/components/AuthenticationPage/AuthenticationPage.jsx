@@ -1,31 +1,30 @@
-import React,{Component} from 'react';
+import React from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
-import {Link} from 'react-router';
 import $ from 'jquery';
 
 
-class AuthenticationPage extends React.Component{
+class AuthenticationPage extends React.Component {
 
-  state={
-    githubUrl:''
+  state= {
+    githubUrl: ''
   };
 
-  componentDidMount (){
+  componentDidMount () {
     $.ajax({
-      url:'/oauth/login',
-      type:'GET',
-      datatype:'JSON',
-      success: function(data){
-        this.setState({githubUrl:data});
+      url: '/api/v1/auth/github/login',
+      type: 'GET',
+      datatype: 'JSON',
+      success: function(data) {
+        this.setState({githubUrl: data});
       }.bind(this)
 
     });
   }
-  render(){
+  render() {
     return(
       <div className='row center-xs'>
-      <div className='col-xs-12 col-mg-12 col-lg-12'>  
-      <h3 style={{marginTop:'100px'}}>Click on the below button to login to your GitHub Account</h3>
+      <div className='col-xs-12 col-mg-12 col-lg-12'>
+      <h3 style={{marginTop: '100px'}}>Click on the below button to login to your GitHub Account</h3>
       <img src="./components/AuthenticationPage/images.png" />
       <div className='row center-xs'>
       <a href={this.state.githubUrl}>
@@ -35,8 +34,7 @@ class AuthenticationPage extends React.Component{
       </div>
       </div>
       );
-  };
-};
-
+  }
+}
 
 export default AuthenticationPage;

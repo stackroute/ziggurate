@@ -1,14 +1,13 @@
-import React,{Component} from 'react';
+import React from 'react';
 import HomeAppBar from '../../components/HomeAppBar';
-
 import NodesCluster from '../../components/NodesCluster';
 import $ from 'jquery';
 
-class NodesClusterPage extends React.Component{
+class NodesClusterPage extends React.Component {
 
-	state={
-		data:[],
-		dropdown:[]
+	state= {
+		data: [],
+		dropdown: []
 	};
 
 	handleFilter = (filter) =>
@@ -18,30 +17,31 @@ class NodesClusterPage extends React.Component{
 
 	getData = (filter) => {
 		$.ajax({
-			url:'/nodes/'+filter,
-			type:'GET',
-			datatype:'json',
-			success: function(data){
-				this.setState({dropdown:data[0]["dropDown"]});
-				this.setState({data:data});
+			url: '/api/v1/nodes/' + filter,
+			type: 'GET',
+			datatype: 'json',
+			success: function(data) {
+				this.setState({dropdown: data[0].dropDown});
+				this.setState({data: data});
 			}.bind(this)
 		});
 	}
-	componentDidMount = () =>{
-		this.getData("all");
+	componentDidMount = () => {
+		this.getData('all');
 	}
 
-	render(){
-		return(<div>
+	render() {
+		return(
+			<div>
 			<HomeAppBar />
 			<div className='container-fluid'>
-			<NodesCluster filter={this.handleFilter} 
-			serviceListData={this.state.data} 
+			<NodesCluster filter={this.handleFilter}
+			serviceListData={this.state.data}
 			dropdowndata={this.state.dropdown}/>
 			</div>
 			</div>
 			);
 	}
-};
+}
 
 export default NodesClusterPage;
