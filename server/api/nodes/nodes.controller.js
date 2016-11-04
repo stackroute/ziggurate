@@ -48,7 +48,7 @@ function calculateTime(data) {
         'yesterday');
     }
     return(
-      today.getDate() - date.getDate(), ' days ago');
+      today.getDate() - date.getDate() + ' days ago');
   }
   if(today.getHours() - date.getHours() === 1 && today.getMinutes() - date.getMinutes() > 0) {
     return(

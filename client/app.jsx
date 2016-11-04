@@ -24,12 +24,12 @@ injectTapEventPlugin();
 function decodeToken(token) {
 let decoded = jwt(token);
 return(
-	decoded.roles[0]);
+	decoded.roles[0].toString());
 }
 function redirectIfLoggedIn(nextState, replace, next) {
 	const token = cookie.load('token');
 	if(token) {
-		if(decodeToken(token).toString() === 'admin') {
+		if(decodeToken(token) === 'admin') {
 			replace('/nodesclusterpage');
 		}
 		else {

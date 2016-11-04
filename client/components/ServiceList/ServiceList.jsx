@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router';
-import ActionHome from 'material-ui/svg-icons/action/home';
+import ArrowBack from 'material-ui/svg-icons/navigation/arrow-back';
 import ServiceCard from '../ServiceCard';
 
 
@@ -14,8 +14,8 @@ class ServiceList extends React.Component
     return (
       <div>
       <div className='row'>
-      <Link to='/dashboard'>
-      <ActionHome color='black' hoverColor='#F44336' style={{height: '50px', width: '50px'}}/>
+      <Link to='/apps'>
+      <ArrowBack color='black' hoverColor='#F44336' style={{height: '50px', width: '50px'}}/>
       </Link>
        </div>
        <div className='row center-xs'>
