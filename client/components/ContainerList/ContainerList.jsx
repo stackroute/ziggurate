@@ -4,7 +4,13 @@ import ContainerCard from '../ContainerCard';
 
 class ContainerList extends React.Component
 {
-
+  static get propTypes() {
+    return(
+    {
+      containerListData: React.PropTypes.array.isRequired,
+      nodeName: React.PropTypes.string.isRequired
+    });
+  }
   render() {
     let containercard = this.props.containerListData.map(function(value, index)
     {

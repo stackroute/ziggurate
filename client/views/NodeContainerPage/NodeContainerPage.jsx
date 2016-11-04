@@ -8,8 +8,14 @@ import FlatButton from 'material-ui/FlatButton';
 
 import $ from 'jquery';
 
-
 class NodeContainerPage extends React.Component {
+
+	static get propTypes() {
+		return(
+		{
+			params: React.PropTypes.object.isRequired
+		});
+	}
 
 	state= {
 		data: [],

@@ -5,28 +5,26 @@ const docker = new Docker({socketPath: '/var/run/docker.sock'});
 
 // This function will create the drop down list for the nodes page
 function createSelection(data) {
-  let dockerDropDown = [];
+  let dock = [];
   for(let i = 0; i < data.length; i = i + 1) {
-    if(!dockerDropDown.includes(data[i].Spec.Role)) {
-      dockerDropDown.push(data[i].Spec.Role);
+    if(!dock.includes(data[i].Spec.Role)) {
+      dock.push(data[i].Spec.Role);
     }
 
     if(Object.keys(data[i]).includes('ManagerStatus'))
     {
-      if(Object.keys(data[i].ManagerStatus).includes('Leader'))
+      if(Object.keys(data[i].ManagerStatus).includes('Leader') && !dock.includes('Swarm-Leader'))
       {
-        if(!dockerDropDown.includes('Swarm-Leader')) {
-         dockerDropDown.push('Swarm-Leader');
-       }
+       dock.push('Swarm-Leader');
      }
    }
  }
 
- for(let i = 0; i < dockerDropDown.length; i = i + 1) {
-  dockerDropDown[i] = dockerDropDown[i].replace('worker', 'Swarm-Worker');
-  dockerDropDown[i] = dockerDropDown[i].replace('manager', 'Swarm-Manager');
+ for(let i = 0; i < dock.length; i = i + 1) {
+  dock[i] = dock[i].replace('worker', 'Swarm-Worker');
+  dock[i] = dock[i].replace('manager', 'Swarm-Manager');
 }
-return dockerDropDown;
+return dock;
 }
 
 function calculateTime(data) {
@@ -67,41 +65,57 @@ function calculateTime(data) {
     today.getMinutes() - date.getMinutes() + ' minutes ago');
 }
 
+
+function allselection(data) {
+  if(Object.keys(data).includes('ManagerStatus')) {
+    if(Object.keys(data.ManagerStatus).includes('Leader')) {
+      return 'Swarm Leader';
+    }
+    return 'Swarm Manager';
+  }
+  return 'Swarm Worker';
+}
+
+function leaderselection(data) {
+ if(Object.keys(data).includes('ManagerStatus')) {
+  if(Object.keys(data.ManagerStatus).includes('Leader')) {
+    return 'Swarm Leader';
+  }
+}
+return null;
+}
+
+function managerselection(data) {
+  if(Object.keys(data).includes('ManagerStatus')) {
+    if(!Object.keys(data.ManagerStatus).includes('Leader')) {
+      return 'Swarm Manager';
+    }
+      return null;
+  }
+  return null;
+}
 // this function will return a json info for all swarm machines
 function createJson(data, mode) {
   let dockerSystems = [];
-  let dockerDropDown = createSelection(data);
-
+  let dock = createSelection(data);
+  let leaderflag = true;
+  let managerflag = true;
   for(let i = 0; i < data.length; i = i + 1) {
     let dockerSystem = {};
 
  // this is for all systems
  if(mode === 'all')
  {
-  if(Object.keys(data[i]).includes('ManagerStatus')) {
-    if(Object.keys(data[i].ManagerStatus).includes('Leader')) {
-      dockerSystem.role = 'Swarm Leader';
-    }
-    else {
-      dockerSystem.role = 'Swarm Manager';
-    }
-  }
-  else {
-   dockerSystem.role = 'Swarm Worker';
- }
+  dockerSystem.role = allselection(data[i]);
 }
 // all system ends here
 
 // this is for Leader
 if(mode === 'leader')
 {
-  if(Object.keys(data[i]).includes('ManagerStatus')) {
-    if(Object.keys(data[i].ManagerStatus).includes('Leader')) {
-      dockerSystem.role = 'Swarm Leader';
-    }
-    else {
-      continue;
-    }
+  leaderflag = leaderselection(data[i]);
+  if(leaderflag) {
+    dockerSystem.role = leaderflag;
   }
   else {
     continue;
@@ -112,15 +126,12 @@ if(mode === 'leader')
 // this is for manager
 else if (mode === 'manager')
 {
-  if(Object.keys(data[i]).includes('ManagerStatus')) {
-    if(Object.keys(data[i].ManagerStatus).includes('Leader')) {
-      continue;
-    }
-    else {
-      dockerSystem.role = 'Swarm Manager';
-    }
+  managerflag = managerselection(data[i]);
+  if(managerflag) {
+    dockerSystem.role = managerflag;
   }
-  else {
+  else
+  {
     continue;
   }
 }
@@ -147,7 +158,7 @@ else if (mode === 'manager')
   dockerSystem.name = data[i].Description.Hostname;
   dockerSystem.createdAt = calculateTime(new Date(data[i].CreatedAt).toLocaleString());
   dockerSystem.updatedAt = calculateTime(new Date(data[i].UpdatedAt).toLocaleString());
-  dockerSystem.dropDown = dockerDropDown;
+  dockerSystem.dropDown = dock;
   dockerSystems.push(dockerSystem);
 }
 return dockerSystems;

@@ -1,5 +1,4 @@
 /* eslint no-process-env: 0 */
-
 module.exports = {
     PORT: process.env.PORT || 8080,
 	GITHUB_CLIENT_ID: '674dd35f95c2ca00bbcc',

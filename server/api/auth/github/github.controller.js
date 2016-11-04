@@ -7,27 +7,23 @@ const jsonwebtoken = require('jsonwebtoken');
 
 function getOrganisations(response0, callback) {
   let adm = 'user';
-  let org = '';
   request
   .get(response0.organizations_url.toString())
   .set('User-Agent', config.USER_AGENT)
   .set('Accept', 'application/json')
   .end(function(err, response1) {
     if(err) {
+      response0.status(500).json(err); return;
+    }
+    if(response1.body.length === 0) {
       adm = 'user';
     }
     else
     {
-      if(response1.body.length === 0) {
-        adm = 'user';
-      }
-      else
-      {
-        for(let i = 0; i < response1.body.length; i = i + 1) {
-          if(response1.body[i].login === config.GITHUB_ORGANISATION) {
-            adm = 'admin';
-            break;
-          }
+      for(let i = 0; i < response1.body.length; i = i + 1) {
+        if(response1.body[i].login === config.GITHUB_ORGANISATION) {
+          adm = 'admin';
+          break;
         }
       }
     }
@@ -56,7 +52,6 @@ module.exports = {
     res.send('https://github.com/login/oauth/authorize?client_id=' + config.GITHUB_CLIENT_ID);
   },
   complete: function(req, res) {
-    let user = '';
     const code = req.query.code;
     request
     .get('https://github.com/login/oauth/access_token')

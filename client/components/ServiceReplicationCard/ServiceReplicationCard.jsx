@@ -10,14 +10,22 @@ import Logs from '../Logs';
 
 class ServiceReplicationCard extends React.Component
 {
- state= {open: false};
 
- handleClose = () => {
-   this.setState({open: false, expanded: false});
+    static get propTypes() {
+        return(
+        {
+            mappedData: React.PropTypes.object.isRequired
+        });
+    }
+
+    state= {open: false};
+
+    handleClose = () => {
+     this.setState({open: false, expanded: false});
  };
 
  handleOpen = () => {
-   this.setState({open: true});
+     this.setState({open: true});
  };
 
 
@@ -32,7 +40,10 @@ class ServiceReplicationCard extends React.Component
     <CardHeader
     title={this.props.mappedData.name}
     titleStyle={{fontSize: '24px'}}
-    avatar={<Badge badgeContent={''} primary={true} badgeStyle={{background: '#4CAF50', right: '10px'}}/>}
+    avatar={
+        <Badge badgeContent={''}
+        primary={true}
+        badgeStyle={{background: '#4CAF50', right: '10px'}}/>}
     style={{fontWeight: 'bold', background: 'lightGrey'}}
     />
     <CardText expandable={true}>
@@ -42,7 +53,11 @@ class ServiceReplicationCard extends React.Component
     <Divider />
     </CardText>
     <CardActions>
-    <FlatButton label='Logs' secondary={true} onTouchTap={this.handleOpen} style={{marginLeft: '70%'}}/>
+    <FlatButton
+    label='Logs'
+    secondary={true}
+    onTouchTap={this.handleOpen}
+    style={{marginLeft: '70%'}}/>
     </CardActions>
     </Card>
 

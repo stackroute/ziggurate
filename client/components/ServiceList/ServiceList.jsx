@@ -6,6 +6,12 @@ import ServiceCard from '../ServiceCard';
 
 class ServiceList extends React.Component
 {
+  static get propTypes() {
+    return(
+    {
+      serviceListData: React.PropTypes.array.isRequired
+    });
+  }
   render() {
     let servicecard = this.props.serviceListData.map(function(value, index) {
      return (

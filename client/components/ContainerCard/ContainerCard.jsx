@@ -6,6 +6,14 @@ import {List, ListItem} from 'material-ui/List';
 class ContainerCard extends React.Component
 {
 
+    static get propTypes() {
+        return(
+        {
+            color: React.PropTypes.string.isRequired,
+            id: React.PropTypes.number.isRequired,
+            value: React.PropTypes.object.isRequired
+        });
+    }
   render() {
     const style = {
      width: '100%',

@@ -5,6 +5,14 @@ import AppCard from '../AppCard';
 
 class AppList extends React.Component
 {
+
+  static get propTypes() {
+    return (
+    {
+            appListData: React.PropTypes.array.isRequired
+     });
+  }
+
   render() {
     let appcard = this.props.appListData.map(function(value, index) {
      return(
@@ -13,7 +21,8 @@ class AppList extends React.Component
     return(
       <div>
       <div className='row'>
-      <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRNAKayx28PcYj8dTzqF4jo48tQ5zXomWXF93CQWbVsGNBmtdSE9A" style={{width: '50px', height: '50px', marginTop: '14px'}} />
+      <img src='./components/AppList/apps.jpg'
+      style={{width: '50px', height: '50px', marginTop: '14px'}} />
       <h2 >
       App DashBoard
       </h2>

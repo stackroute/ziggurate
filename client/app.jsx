@@ -66,7 +66,10 @@ class App extends React.Component {
 			<Route path='/services' component={Services} onEnter={redirectIfNotLoggedIn}/>
 			<Route path='/services/replication' component={Replications} onEnter={redirectIfNotLoggedIn}/>
 			<Route path='/nodesclusterpage' component={NodesClusterPage} onEnter={redirectIfNotLoggedIn}/>
-			<Route path='/nodesclusterpage/:nodeId/:nodeName' component={NodeContainerPage} onEnter={redirectIfNotLoggedIn}/>
+			<Route
+			path='/nodesclusterpage/:nodeId/:nodeName'
+			component={NodeContainerPage}
+			onEnter={redirectIfNotLoggedIn}/>
 			</Router>
 			</div>
 			</MuiThemeProvider>

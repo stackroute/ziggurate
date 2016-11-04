@@ -1,12 +1,18 @@
 import React from 'react';
 import Avatar from 'material-ui/Avatar';
-import {red300, grey400, orange200, cyan300, brown200, lightBlue300, deepOrangeA100, lightGreen400, amberA200, lime500, white000} from 'material-ui/styles/colors';
+import {red300, orange200, cyan300, amberA200, white000} from 'material-ui/styles/colors';
 import {Link} from 'react-router';
 
-const colour = [red300, grey400, orange200, cyan300, brown200, lightBlue300, deepOrangeA100, lightGreen400, amberA200, lime500];
+const colour = [red300, orange200, cyan300, amberA200];
 let i = 0;
 class ServiceCard extends React.Component
 {
+  static get propTypes() {
+    return(
+    {
+      value: React.PropTypes.object.isRequired
+    });
+  }
   render() {
     i = i + 1;
     if(i === 10) {

@@ -8,6 +8,7 @@ const minifyCss = require('gulp-minify-css');
 const clean = require('gulp-clean');
 const flatten = require('gulp-flatten');
 const eslint = require('gulp-eslint');
+const htmlhint = require('gulp-htmlhint');
 
 const webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
@@ -16,53 +17,64 @@ const gulpWebpack = require('gulp-webpack');
 gulp.task('webpack', ['clean'], function() {
   const config = require('./webpack.config.js');
   return gulp.src('./client/app.jsx')
-    .pipe(gulpWebpack(config))
-    .pipe(gulp.dest('client/assets'));
+  .pipe(gulpWebpack(config))
+  .pipe(gulp.dest('client/assets'));
 });
 
 gulp.task('usemin', ['clean', 'webpack'], function() {
   return gulp.src(['client/*.html'])
-    .pipe(usemin({
-      html: [minifyHtml({empty: true})],
-      js: [uglify(), rev()],
-      inlinejs: [uglify()],
-      css: [rev()],
-      inlinecss: [minifyCss()]
-    })).pipe(gulp.dest('dist/server/public'));
+  .pipe(usemin({
+    html: [minifyHtml({empty: true})],
+    js: [uglify(), rev()],
+    inlinejs: [uglify()],
+    css: [rev()],
+    inlinecss: [minifyCss()]
+  })).pipe(gulp.dest('dist/server/public'));
 });
 
 gulp.task('copy:fonts', ['clean'], function() {
   return gulp.src('client/**/*.ttf')
-    .pipe(flatten())
-    .pipe(gulp.dest('dist/server/public/fonts'));
+  .pipe(flatten())
+  .pipe(gulp.dest('dist/server/public/fonts'));
 });
 
 gulp.task('copy:package.json', ['clean'], function() {
   return gulp.src('package.json')
-    .pipe(gulp.dest('dist/'));
+  .pipe(gulp.dest('dist/'));
 });
 
 gulp.task('copy:server', ['clean'], function() {
   gulp.src(['server/**/*'])
-    .pipe(gulp.dest('dist/server/'));
+  .pipe(gulp.dest('dist/server/'));
 });
 
 gulp.task('clean', function() {
   return gulp.src('dist', {read: false})
-    .pipe(clean());
+  .pipe(clean());
 });
+
 
 gulp.task('copy', ['copy:package.json', 'copy:server', 'copy:fonts']);
 
 gulp.task('build', ['eslint', 'usemin', 'copy']);
 
+gulp.task('lint', ['eslint', 'htmlhint']);
+
+
 gulp.task('eslint', function() {
   return gulp.src([
     'gulpfile.js', 'webpack.config.js', '.eslintrc.js',
     'client/**/*.jsx', '!client/bower_components/**/*', 'server/**/*'])
-    .pipe(eslint())
-    .pipe(eslint.format())
-    .pipe(eslint.failAfterError());
+  .pipe(eslint())
+  .pipe(eslint.format())
+  .pipe(eslint.failAfterError());
+});
+
+gulp.task('htmlhint', function() {
+  return gulp.src(['**/*.html', '!node_modules/**/*',
+  '!client/bower_components/**/*', '!dist/**/*'])
+  .pipe(htmlhint({htmlhintrc: '.htmlhintrc'}))
+  .pipe(htmlhint.failReporter());
 });
 
 gulp.task('webpack-dev-server', ['eslint'], function() {

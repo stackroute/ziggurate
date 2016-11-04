@@ -10,6 +10,7 @@ import ActionExitToApp from 'material-ui/svg-icons/action/exit-to-app';
 import HardwareDesktopWindows from 'material-ui/svg-icons/hardware/desktop-windows';
 import AppIcon from 'material-ui/svg-icons/navigation/apps';
 import DashBoardIcon from 'material-ui/svg-icons/action/dashboard';
+import NodesIcon from 'material-ui/svg-icons/hardware/device-hub';
 
 import jwt from 'jwt-decode';
 
@@ -50,16 +51,19 @@ export default class HomeAppBar extends React.Component {
       });
     };
 
-    const token = cookie.load('token');
-    if(decodeToken(token) === 'admin') {
-      this.setState({userType: true
-      });
-    }
-    else
-    {
-      this.setState({userType: false
-      });
-    }
+    const viewType = () => {
+      const token = cookie.load('token');
+      if(decodeToken(token) === 'admin') {
+        this.setState({userType: true
+        });
+      }
+      else
+      {
+        this.setState({userType: false
+        });
+      }
+    };
+
     if(!localStorage.user) {
       request
       .get('/api/v1/auth/github/me')
@@ -67,9 +71,11 @@ export default class HomeAppBar extends React.Component {
         if(err) { throw err; }
         localStorage.user = JSON.stringify(response.body);
         setUserInState();
+        viewType();
       });
     } else {
       setUserInState();
+      viewType();
     }
   }
 
@@ -99,7 +105,7 @@ export default class HomeAppBar extends React.Component {
 
         { this.state.userType ?
           <MenuItem
-          leftIcon={<HardwareDesktopWindows />}
+          leftIcon={<NodesIcon />}
           onTouchTap={() => { this.context.router.push('/nodesclusterpage'); }}>
           Nodes
           </MenuItem> :

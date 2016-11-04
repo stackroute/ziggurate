@@ -3,6 +3,13 @@ import ServiceReplicationCard from '../ServiceReplicationCard';
 
 class ServiceReplicationCluster extends React.Component
 {
+	static get propTypes() {
+		return(
+		{
+			serviceListData: React.PropTypes.array.isRequired
+		});
+	}
+
 	render() {
 		let content = this.props.serviceListData.map(function(data, index) {
 			return(

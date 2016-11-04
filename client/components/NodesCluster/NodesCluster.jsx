@@ -6,6 +6,16 @@ import MenuItem from 'material-ui/MenuItem';
 
 
 class NodesCluster extends React.Component {
+	static get propTypes() {
+		return(
+		{
+			filter: React.PropTypes.func.isRequired,
+			dropdowndata: React.PropTypes.array.isRequired,
+			serviceListData: React.PropTypes.array.isRequired
+			});
+	}
+
+
 	state={
 		value: 'all'
 	};

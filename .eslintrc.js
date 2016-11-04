@@ -5,6 +5,14 @@ module.exports = {
     "node": true,
     "es6": true
   },
+  "globals": {
+    "describe": false,
+    "it": false,
+    "before": false,
+    "beforeEach": false,
+    "after": false,
+    "afterEach": false
+  },
 
   "plugins": ["react"],
 
@@ -141,10 +149,10 @@ module.exports = {
     "no-label-var": 2, // disallow labels that share a name with a variable
     "no-shadow": 2, // disallow declaration of variables already declared in the outer scope
     "no-shadow-restricted-names": 2, // disallow shadowing of names such as arguments
-    // "no-undef": 2, // disallow use of undeclared variables unless mentioned in a /*global */ block
+    "no-undef": 2, // disallow use of undeclared variables unless mentioned in a /*global */ block
     "no-undef-init": 2, // disallow use of undefined when initializing variables
     "no-undefined": 2, // disallow use of undefined variable (off by default)
-    // "no-unused-vars": 2, // disallow declaration of variables that are not used in the code
+    "no-unused-vars": 2, // disallow declaration of variables that are not used in the code
     "no-use-before-define": 2, // disallow use of variables before they are defined
 
     //
@@ -152,7 +160,7 @@ module.exports = {
     //
     // These rules are purely matters of style and are quite subjective.
     //
-    // "indent": ["error", tab], // this option sets a specific tab width for your code (off by default)
+    // "indent": [1, 2], // this option sets a specific tab width for your code (off by default)
     // "brace-style": 1, // enforce one true brace style (off by default)
     "camelcase": 1, // require camel case names
     "comma-spacing": [1, {"before": false, "after": true}], // enforce spacing before and after comma
@@ -162,7 +170,7 @@ module.exports = {
     "func-names": 0, // require function expressions to have a name (off by default)
     "func-style": 0, // enforces use of function declarations or expressions (off by default)
     "key-spacing": [1, {"beforeColon": false, "afterColon": true}], // enforces spacing between keys and values in object literal properties
-    "max-nested-callbacks": [1, 5], // specify the maximum depth callbacks can be nested (off by default)
+    "max-nested-callbacks": [1, 3], // specify the maximum depth callbacks can be nested (off by default)
     "new-cap": [1, {newIsCap: true, capIsNew: false}], // require a capital letter for constructors
     "new-parens": 1, // disallow the omission of parentheses when invoking a constructor with no arguments
     "newline-after-var": 0, // allow/disallow an empty newline after var statement (off by default)
@@ -186,10 +194,10 @@ module.exports = {
     "semi": [1, "always"], // require or disallow use of semicolons instead of ASI
     "semi-spacing": [1, {"before": false, "after": true}], // enforce spacing before and after semicolons
     "sort-vars": 0, // sort variables within the same declaration block (off by default)
-    "keyword-spacing": [0], // require a space after certain keywords (off by default)
+    // "keyword-spacing": [0], // require a space after certain keywords (off by default)
     "space-before-blocks": [1, "always"], // require or disallow space before blocks (off by default)
-    // "space-before-function-paren": [1, {"anonymous": "always", "named": "never"}], // require or disallow space before function opening parenthesis (off by default)
-    "object-curly-spacing": [1, "never"], // require or disallow spaces inside brackets (off by default)
+    //"space-before-function-paren": [1, {"anonymous": "always", "named": "never"}], // require or disallow space before function opening parenthesis (off by default)
+    // "object-curly-spacing": [1, "never"], // require or disallow spaces inside brackets (off by default)
     "array-bracket-spacing": [1, "never"], // require or disallow spaces inside brackets (off by default)
     "computed-property-spacing": [1, "never"], // require or disallow spaces inside brackets (off by default)
     "space-in-parens": [1, "never"], // require or disallow spaces inside parentheses (off by default)
@@ -213,8 +221,8 @@ module.exports = {
     // While the names of the rules may not match up with the JSHint/JSLint counterpart,
     // the functionality is the same.
     //
-    "max-depth": [2, 6], // specify the maximum depth that blocks can be nested (off by default)
-    "max-len": [2, 200, 2], // specify the maximum length of a line in your program (off by default)
+    "max-depth": [2, 3], // specify the maximum depth that blocks can be nested (off by default)
+    "max-len": [2, 100, 2], // specify the maximum length of a line in your program (off by default)
     "max-params": [2, 5], // limits the number of parameters that can be used in the function declaration. (off by default)
     "max-statements": 0, // specify the maximum number of statement allowed in a function (off by default)
     "no-bitwise": 0, // disallow use of bitwise operators (off by default)
@@ -230,11 +238,11 @@ module.exports = {
     "react/jsx-sort-props": 0, // Enforce props alphabetical sorting
     "react/jsx-uses-react": 2, // Prevent React to be incorrectly marked as unused
     "react/jsx-uses-vars": 2, // Prevent variables used in JSX to be incorrectly marked as unused
-    // "react/no-did-mount-set-state": 2, // Prevent usage of setState in componentDidMount
+    "react/no-did-mount-set-state": 2, // Prevent usage of setState in componentDidMount
     "react/no-did-update-set-state": 2, // Prevent usage of setState in componentDidUpdate
     "react/no-multi-comp": 0, // Prevent multiple component definition per file
     "react/no-unknown-property": 2, // Prevent usage of unknown DOM property
-    // "react/prop-types": 2, // Prevent missing props validation in a React component definition
+    "react/prop-types": 2, // Prevent missing props validation in a React component definition
     "react/react-in-jsx-scope": 2, // Prevent missing React when using JSX
     "react/self-closing-comp": 2, // Prevent extra closing tags for components without children
     "react/jsx-wrap-multilines": 2, // Prevent missing parentheses around multilines JSX

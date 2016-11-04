@@ -24,7 +24,8 @@ class AuthenticationPage extends React.Component {
     return(
       <div className='row center-xs'>
       <div className='col-xs-12 col-mg-12 col-lg-12'>
-      <h3 style={{marginTop: '100px'}}>Click on the below button to login to your GitHub Account</h3>
+      <h3
+      style={{marginTop: '100px'}}>Click on the below button to login to your GitHub Account</h3>
       <img src="./components/AuthenticationPage/images.png" />
       <div className='row center-xs'>
       <a href={this.state.githubUrl}>
