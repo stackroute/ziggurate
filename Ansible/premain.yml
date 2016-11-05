@@ -10,3 +10,45 @@
      - stackroute.docker-experimental
      - stackroute.docker-compose
      - stackroute.consul
+     - stackroute.consul-Agent
+
+ - hosts: consul-server
+   become: true
+   tasks: 
+     - name: Install Mailutils and jq for emails
+       apt: name={{ item }} state=latest
+       with_items :
+         - mailutils
+         - jq
+   roles:     
+     - stackroute.consul
+     - emailhandler    
+     - stackroute.consul-Server
+
+ - hosts: cluster
+   become: true
+   tasks: 
+     - name: Adding members to the consul
+       shell: >
+         consul join "{{hostvars[groups['consul-server'][0]]['ansible_host']}}"
+
+ - hosts: consul-server
+   become: true
+   tasks: 
+     - name: Copy the Email notifier Serivce File
+       copy: src=files/emailhandler.service dest=/etc/systemd/system force=yes mode=0755
+
+     - name: Copy the Bash Script to start the email handler
+       copy: src=files/emailNotifier.sh dest=/home/vagrant/ force=yes mode=0755
+  
+     - name: Reload the Daemon
+       shell: >
+         systemctl daemon-reload
+
+     - name: Enable the service
+       shell: >
+         systemctl enable emailhandler.service
+
+     - name: start the service
+       shell: >
+         systemctl start emailhandler.service

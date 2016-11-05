@@ -1,24 +1,5 @@
 ---
-# this will start the consul worker on each machine
- - hosts: docker-consul-workers
-   become: true
-   roles:
-     - stackroute.consul-Agent
 
-#this will run the consul server
- - hosts: consul-server
-   become: true
-   roles:
-     - stackroute.consul-Server
-
-#add all in the cluster
- - hosts: docker-consul-workers
-   become: true
-   tasks: 
-     - name: Adding members to the consul
-       shell: >
-         consul join "{{hostvars[groups['consul-server'][0]]['ansible_host']}}"
-    
 # determine the status of each manager node and break them
 # into two groups:
 #   - swarm_manager_operational (swarm is running and active)

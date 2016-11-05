@@ -1,0 +1,11 @@
+---
+# tasks file for emailhandler
+- name: Copy email Handler Configuration
+  template: 
+    src: emailhandler.sh 
+    dest: /home/vagrant
+    owner: root
+    group: root
+    force: yes
+    mode: 0755
+    

@@ -1,0 +1,5 @@
+---
+# defaults file for emailhandler
+consul_server_ip: 172.23.238.236
+consul_server_port: 8500
+email_recipients: 'kaur007imneet@gmail.com priyanka.thakur153@gmail.com  dhirenwipro@gmail.com ankit.bansal.sit@gmail.com nischay.goyal@gmail.com ak2471016@gmail.com'
