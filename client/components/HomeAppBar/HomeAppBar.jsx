@@ -104,11 +104,18 @@ export default class HomeAppBar extends React.Component {
         </div>
 
         { this.state.userType ?
+          <div>
+          <MenuItem
+          leftIcon={<DashBoardIcon />}
+          onTouchTap={() => { this.context.router.push('/dashboard'); }}>
+          DashBoard
+          </MenuItem>
           <MenuItem
           leftIcon={<NodesIcon />}
           onTouchTap={() => { this.context.router.push('/nodesclusterpage'); }}>
           Nodes
-          </MenuItem> :
+          </MenuItem>
+          </div> :
           <MenuItem
           leftIcon={<DashBoardIcon />}
           onTouchTap={() => { this.context.router.push('/dashboard'); }}>
@@ -123,7 +130,7 @@ export default class HomeAppBar extends React.Component {
         <MenuItem
         leftIcon={<AppIcon />}
         onTouchTap={() => { this.context.router.push('/apps'); }}>
-        Apps
+        Deployed Apps
         </MenuItem>
         <MenuItem
         leftIcon={<ActionExitToApp />}
