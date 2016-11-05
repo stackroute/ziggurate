@@ -1,0 +1,12 @@
+---
+
+ - hosts: docker-consul-workers
+   become: true
+   tasks:
+     - name: add the user to docker group
+       shell: >
+         usermod -aG docker vagrant
+   roles:
+     - stackroute.docker-experimental
+     - stackroute.docker-compose
+     - stackroute.consul

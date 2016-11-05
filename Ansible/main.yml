@@ -1,19 +1,11 @@
 ---
-# This will install the docker and consul on each appfabric
-# this will add the vagrant to the docker group
 # this will start the consul worker on each machine
  - hosts: docker-consul-workers
    become: true
-   tasks:
-     - name: add the user to docker group
-       shell: >
-         usermod -aG docker vagrant
    roles:
-     - stackroute.docker-experimental
-     - stackroute.docker-compose
      - stackroute.consul-Agent
 
-#this will install the consul on server machine and run the consul server
+#this will run the consul server
  - hosts: consul-server
    become: true
    roles:
@@ -27,7 +19,6 @@
        shell: >
          consul join "{{hostvars[groups['consul-server'][0]]['ansible_host']}}"
     
-
 # determine the status of each manager node and break them
 # into two groups:
 #   - swarm_manager_operational (swarm is running and active)
@@ -57,7 +48,6 @@
        run_once: true
    roles:
      - appfabricConfiguration
-     - { role: geerlingguy.nodejs, nodejs_version: "6.x" }
 
 # determine the status of each worker node and break them
 # into two groups:
