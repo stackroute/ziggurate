@@ -105,11 +105,11 @@
 
 	var _DashBoardView2 = _interopRequireDefault(_DashBoardView);
 
-	var _DeployBotView = __webpack_require__(553);
+	var _DeployBotView = __webpack_require__(555);
 
 	var _DeployBotView2 = _interopRequireDefault(_DeployBotView);
 
-	var _reactTapEventPlugin = __webpack_require__(559);
+	var _reactTapEventPlugin = __webpack_require__(561);
 
 	var _reactTapEventPlugin2 = _interopRequireDefault(_reactTapEventPlugin);
 
@@ -64204,6 +64204,10 @@
 
 	var _HomeAppBar2 = _interopRequireDefault(_HomeAppBar);
 
+	var _DashBoard = __webpack_require__(553);
+
+	var _DashBoard2 = _interopRequireDefault(_DashBoard);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -64228,11 +64232,7 @@
 	        'div',
 	        null,
 	        _react2.default.createElement(_HomeAppBar2.default, null),
-	        _react2.default.createElement(
-	          'small',
-	          null,
-	          'This is the Dashboard View'
-	        )
+	        _react2.default.createElement(_DashBoard2.default, null)
 	      );
 	    }
 	  }]);
@@ -64252,7 +64252,269 @@
 	  value: true
 	});
 
-	var _DeployBotView = __webpack_require__(554);
+	var _DashBoard = __webpack_require__(554);
+
+	var _DashBoard2 = _interopRequireDefault(_DashBoard);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _DashBoard2.default;
+
+/***/ },
+/* 554 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _Paper = __webpack_require__(438);
+
+	var _Paper2 = _interopRequireDefault(_Paper);
+
+	var _Divider = __webpack_require__(504);
+
+	var _Divider2 = _interopRequireDefault(_Divider);
+
+	var _Avatar = __webpack_require__(466);
+
+	var _Avatar2 = _interopRequireDefault(_Avatar);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var DashBoard = function (_React$Component) {
+		_inherits(DashBoard, _React$Component);
+
+		function DashBoard() {
+			var _ref;
+
+			var _temp, _this, _ret;
+
+			_classCallCheck(this, DashBoard);
+
+			for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+				args[_key] = arguments[_key];
+			}
+
+			return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = DashBoard.__proto__ || Object.getPrototypeOf(DashBoard)).call.apply(_ref, [this].concat(args))), _this), _this.getData = function () {
+				$.ajax({
+					url: '/api/v1/dashboard/admin',
+					type: 'GET',
+					dataType: 'json',
+					success: function success(data) {
+						console.log(data);
+					}
+				});
+			}, _temp), _possibleConstructorReturn(_this, _ret);
+		}
+
+		_createClass(DashBoard, [{
+			key: 'componentDidMount',
+			value: function componentDidMount() {
+				this.getData();
+			}
+		}, {
+			key: 'render',
+			value: function render() {
+				return _react2.default.createElement(
+					'div',
+					null,
+					_react2.default.createElement(
+						_Paper2.default,
+						{ zDepth: 3, style: { width: '98%', marginTop: 0 } },
+						_react2.default.createElement(
+							'div',
+							{ style: { backgroundColor: '#4CAF50' } },
+							_react2.default.createElement(
+								'h1',
+								{ style: { textAlign: 'center' } },
+								'Healthy Systems'
+							),
+							_react2.default.createElement(_Divider2.default, null)
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'row', style: { justifyContent: 'space-around' } },
+							_react2.default.createElement(
+								'div',
+								{ style: { margin: '10px' } },
+								_react2.default.createElement(
+									_Avatar2.default,
+									{ size: 180 },
+									'A'
+								),
+								_react2.default.createElement(
+									'h2',
+									{ style: { textAlign: 'center' } },
+									'Nodes'
+								)
+							),
+							_react2.default.createElement(
+								'div',
+								{ style: { margin: '10px' } },
+								_react2.default.createElement(
+									_Avatar2.default,
+									{ size: 180 },
+									'B'
+								),
+								_react2.default.createElement(
+									'h2',
+									{ style: { textAlign: 'center' } },
+									'Apps'
+								)
+							),
+							_react2.default.createElement(
+								'div',
+								{ style: { margin: '10px' } },
+								_react2.default.createElement(
+									_Avatar2.default,
+									{ size: 180 },
+									'C'
+								),
+								_react2.default.createElement(
+									'h2',
+									{ style: { textAlign: 'center' } },
+									'Apps'
+								)
+							),
+							_react2.default.createElement(
+								'div',
+								{ style: { margin: '10px' } },
+								_react2.default.createElement(
+									_Avatar2.default,
+									{ size: 180 },
+									'D'
+								),
+								_react2.default.createElement(
+									'h2',
+									{ style: { textAlign: 'center' } },
+									'Apps'
+								)
+							)
+						)
+					),
+					_react2.default.createElement(
+						_Paper2.default,
+						{ zDepth: 3, style: { width: '98%' } },
+						_react2.default.createElement(
+							'div',
+							{ style: { backgroundColor: '#F44336' } },
+							_react2.default.createElement(
+								'h1',
+								{ style: { textAlign: 'center' } },
+								'Unhealthy Systems'
+							),
+							_react2.default.createElement(_Divider2.default, null)
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'row', style: { justifyContent: 'space-around' } },
+							_react2.default.createElement(
+								'div',
+								{ style: { margin: '10px' } },
+								_react2.default.createElement(
+									_Avatar2.default,
+									{ size: 180 },
+									'D'
+								),
+								_react2.default.createElement(
+									'h2',
+									{ style: { textAlign: 'center' } },
+									'Apps'
+								)
+							),
+							_react2.default.createElement(
+								'div',
+								{ style: { margin: '10px' } },
+								_react2.default.createElement(
+									_Avatar2.default,
+									{ size: 180 },
+									'D'
+								),
+								_react2.default.createElement(
+									'h2',
+									{ style: { textAlign: 'center' } },
+									'Apps'
+								)
+							),
+							_react2.default.createElement(
+								'div',
+								{ style: { margin: '10px' } },
+								_react2.default.createElement(
+									_Avatar2.default,
+									{ size: 180 },
+									'D'
+								),
+								_react2.default.createElement(
+									'h2',
+									{ style: { textAlign: 'center' } },
+									'Apps'
+								)
+							),
+							_react2.default.createElement(
+								'div',
+								{ style: { margin: '10px' } },
+								_react2.default.createElement(
+									_Avatar2.default,
+									{ size: 180 },
+									'D'
+								),
+								_react2.default.createElement(
+									'h2',
+									{ style: { textAlign: 'center' } },
+									'Apps'
+								)
+							)
+						)
+					),
+					_react2.default.createElement(
+						_Paper2.default,
+						{ zDepth: 3, style: { width: '98%' } },
+						_react2.default.createElement(
+							'div',
+							null,
+							_react2.default.createElement(
+								'h1',
+								{ style: { textAlign: 'center' } },
+								'Data Events'
+							),
+							_react2.default.createElement(_Divider2.default, null)
+						)
+					)
+				);
+			}
+		}]);
+
+		return DashBoard;
+	}(_react2.default.Component);
+
+	exports.default = DashBoard;
+
+/***/ },
+/* 555 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _DeployBotView = __webpack_require__(556);
 
 	var _DeployBotView2 = _interopRequireDefault(_DeployBotView);
 
@@ -64261,7 +64523,7 @@
 	exports.default = _DeployBotView2.default;
 
 /***/ },
-/* 554 */
+/* 556 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -64280,7 +64542,7 @@
 
 	var _HomeAppBar2 = _interopRequireDefault(_HomeAppBar);
 
-	var _DeployBot = __webpack_require__(555);
+	var _DeployBot = __webpack_require__(557);
 
 	var _DeployBot2 = _interopRequireDefault(_DeployBot);
 
@@ -64319,7 +64581,7 @@
 	exports.default = DeployBotView;
 
 /***/ },
-/* 555 */
+/* 557 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -64328,7 +64590,7 @@
 	  value: true
 	});
 
-	var _DeployBot = __webpack_require__(556);
+	var _DeployBot = __webpack_require__(558);
 
 	var _DeployBot2 = _interopRequireDefault(_DeployBot);
 
@@ -64337,7 +64599,7 @@
 	exports.default = _DeployBot2.default;
 
 /***/ },
-/* 556 */
+/* 558 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -64356,7 +64618,7 @@
 
 	var _Paper2 = _interopRequireDefault(_Paper);
 
-	var _SelectRepositoryMaterial = __webpack_require__(557);
+	var _SelectRepositoryMaterial = __webpack_require__(559);
 
 	var _SelectRepositoryMaterial2 = _interopRequireDefault(_SelectRepositoryMaterial);
 
@@ -64414,7 +64676,7 @@
 	exports.default = DeployBot;
 
 /***/ },
-/* 557 */
+/* 559 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -64423,7 +64685,7 @@
 	  value: true
 	});
 
-	var _SelectRepositoryMaterial = __webpack_require__(558);
+	var _SelectRepositoryMaterial = __webpack_require__(560);
 
 	var _SelectRepositoryMaterial2 = _interopRequireDefault(_SelectRepositoryMaterial);
 
@@ -64432,7 +64694,7 @@
 	exports.default = _SelectRepositoryMaterial2.default;
 
 /***/ },
-/* 558 */
+/* 560 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -64572,11 +64834,11 @@
 	exports.default = SelectRepositoryMaterial;
 
 /***/ },
-/* 559 */
+/* 561 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(process) {var invariant = __webpack_require__(560);
-	var defaultClickRejectionStrategy = __webpack_require__(561);
+	/* WEBPACK VAR INJECTION */(function(process) {var invariant = __webpack_require__(562);
+	var defaultClickRejectionStrategy = __webpack_require__(563);
 
 	var alreadyInjected = false;
 
@@ -64598,14 +64860,14 @@
 	  alreadyInjected = true;
 
 	  __webpack_require__(44).injection.injectEventPluginsByName({
-	    'TapEventPlugin':       __webpack_require__(562)(shouldRejectClick)
+	    'TapEventPlugin':       __webpack_require__(564)(shouldRejectClick)
 	  });
 	};
 
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 560 */
+/* 562 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -64660,7 +64922,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 561 */
+/* 563 */
 /***/ function(module, exports) {
 
 	module.exports = function(lastTouchEvent, clickTimestamp) {
@@ -64671,7 +64933,7 @@
 
 
 /***/ },
-/* 562 */
+/* 564 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -64699,10 +64961,10 @@
 	var EventPluginUtils = __webpack_require__(46);
 	var EventPropagators = __webpack_require__(43);
 	var SyntheticUIEvent = __webpack_require__(77);
-	var TouchEventUtils = __webpack_require__(563);
+	var TouchEventUtils = __webpack_require__(565);
 	var ViewportMetrics = __webpack_require__(78);
 
-	var keyOf = __webpack_require__(564);
+	var keyOf = __webpack_require__(566);
 	var topLevelTypes = EventConstants.topLevelTypes;
 
 	var isStartish = EventPluginUtils.isStartish;
@@ -64847,7 +65109,7 @@
 
 
 /***/ },
-/* 563 */
+/* 565 */
 /***/ function(module, exports) {
 
 	/**
@@ -64895,7 +65157,7 @@
 
 
 /***/ },
-/* 564 */
+/* 566 */
 /***/ function(module, exports) {
 
 	/**

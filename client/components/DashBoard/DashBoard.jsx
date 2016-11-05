@@ -5,53 +5,61 @@ import Avatar from 'material-ui/Avatar';
 
 class DashBoard extends React.Component
 {
+	static get propTypes() {
+		return(
+		{
+			healthData: React.PropTypes.object.isRequired
+		});
+	}
 	render() {
 		return(
 			<div>
 			<Paper zDepth={3} style={{width: '98%', marginTop: 0}}>
-			<div style={{backgroundColor: '#4CAF50'}}>
+			<div>
 			<h1 style={{textAlign: 'center'}}>Healthy Systems</h1>
 			<Divider/>
 			</div>
 			<div className = 'row' style={{justifyContent: 'space-around'}}>
 			<div style= {{margin: '10px'}}>
-			<Avatar size={180}>A</Avatar>
+			<Avatar size={200} backgroundColor='#66BB6A'>{this.props.healthData.healthyNodes}</Avatar>
 			<h2 style={{textAlign: 'center'}}>Nodes</h2>
 			</div>
 			<div style= {{margin: '10px'}}>
-			<Avatar size={180}>B</Avatar>
-			<h2 style={{textAlign: 'center'}}>Apps</h2>
+			<Avatar size={200}
+			backgroundColor='#66BB6A'>{this.props.healthData.healthyContainers}</Avatar>
+			<h2 style={{textAlign: 'center'}}>Containers</h2>
 			</div>
 			<div style= {{margin: '10px'}}>
-			<Avatar size={180}>C</Avatar>
-			<h2 style={{textAlign: 'center'}}>Apps</h2>
+			<Avatar size={200} backgroundColor='#66BB6A'>C</Avatar>
+			<h2 style={{textAlign: 'center'}}>Services</h2>
 			</div>
 			<div style= {{margin: '10px'}}>
-			<Avatar size={180}>D</Avatar>
+			<Avatar size={200} backgroundColor='#66BB6A'>D</Avatar>
 			<h2 style={{textAlign: 'center'}}>Apps</h2>
 			</div>
 			</div>
 			</Paper>
 			<Paper zDepth={3} style={{width: '98%'}}>
-			<div style={{backgroundColor: '#F44336'}}>
+			<div>
 			<h1 style={{textAlign: 'center'}}>Unhealthy Systems</h1>
 			<Divider/>
 			</div>
 			<div className = 'row' style={{justifyContent: 'space-around'}}>
 			<div style= {{margin: '10px'}}>
-			<Avatar size={180}>D</Avatar>
-			<h2 style={{textAlign: 'center'}}>Apps</h2>
+			<Avatar size={200} backgroundColor='#BF360C'>{this.props.healthData.unhealthyNodes}</Avatar>
+			<h2 style={{textAlign: 'center'}}>Nodes</h2>
 			</div>
 			<div style= {{margin: '10px'}}>
-			<Avatar size={180}>D</Avatar>
-			<h2 style={{textAlign: 'center'}}>Apps</h2>
+			<Avatar size={200}
+			backgroundColor='#BF360C'>{this.props.healthData.unhealthyContainers}</Avatar>
+			<h2 style={{textAlign: 'center'}}>Containers</h2>
 			</div>
 			<div style= {{margin: '10px'}}>
-			<Avatar size={180}>D</Avatar>
-			<h2 style={{textAlign: 'center'}}>Apps</h2>
+			<Avatar size={200} backgroundColor='#BF360C'>--</Avatar>
+			<h2 style={{textAlign: 'center'}}>Services</h2>
 			</div>
 			<div style= {{margin: '10px'}}>
-			<Avatar size={180}>D</Avatar>
+			<Avatar size={200} backgroundColor='#BF360C'>D</Avatar>
 			<h2 style={{textAlign: 'center'}}>Apps</h2>
 			</div>
 			</div>
@@ -63,8 +71,8 @@ class DashBoard extends React.Component
 			</div>
 			</Paper>
 			</div>
-		);
-	}
+			);
+}
 }
 
 export default DashBoard;
