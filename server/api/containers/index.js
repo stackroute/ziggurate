@@ -1,1 +1,1 @@
-module.exports = require('./containers.controller');
+module.exports = require('./router');

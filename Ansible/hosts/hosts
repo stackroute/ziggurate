@@ -10,6 +10,8 @@ node10 ansible_host=172.23.238.224 swarm_iface=enp0s8 ansible_user=vagrant node_
 node11 ansible_host=172.23.238.225 swarm_iface=enp0s8 ansible_user=vagrant node_name=node11
 node12 ansible_host=172.23.238.226 swarm_iface=enp0s8 ansible_user=vagrant node_name=node12
 node13 ansible_host=172.23.238.236 swarm_iface=enp0s8 ansible_user=vagrant node_name=node13
+node14 ansible_host=172.23.238.147 swarm_iface=enp0s8 ansible_user=vagrant node_name=node14
+node15 ansible_host=172.23.238.154 swarm_iface=enp0s8 ansible_user=vagrant node_name=node15
 
 [docker-consul-workers]
 node2

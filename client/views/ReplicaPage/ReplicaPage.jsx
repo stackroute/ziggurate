@@ -1,18 +1,24 @@
 import React from 'react';
-import ServiceReplicationCluster from '../../components/ServiceReplicationCluster';
+import ContainerList from '../../components/ContainerList';
 import ServiceReplicationInstances from '../../components/ServiceReplicationInstances';
 import HomeAppBar from '../../components/HomeAppBar';
 import $ from 'jquery';
 
-class Replications extends React.Component {
+class ReplicaPage extends React.Component {
 
+  static get propTypes() {
+    return (
+    {
+      params: React.PropTypes.object.isRequired
+    });
+  }
 	state={
 		data: []
 	};
 
   getData = () => {
     $.ajax({
-      url: 'http://localhost:3000/replica',
+      url: '/api/v1/containers/replicas/' + this.props.params.serviceName,
       type: 'GET',
       datatype: 'JSON',
       success: function(data) {
@@ -30,12 +36,16 @@ class Replications extends React.Component {
 				<div >
 				<HomeAppBar />
         <div className='container-fluid'>
-				<ServiceReplicationInstances />
-				<ServiceReplicationCluster serviceListData={this.state.data}/>
+				<ServiceReplicationInstances
+        serviceName={this.props.params.serviceName}
+        />
+				<ContainerList
+        nodePage={false}
+        containerListData={this.state.data}/>
         </div>
         </div>
 			);
 	}
 }
 
-export default Replications;
+export default ReplicaPage;

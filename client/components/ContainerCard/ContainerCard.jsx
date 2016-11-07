@@ -36,19 +36,31 @@ class ContainerCard extends React.Component
     key={this.props.value.id}
     style={{fontSize: '20px'}}
     disabled = {true}
-    primaryText={<div><strong>ID: </strong>{this.props.value.id}</div>} />
+    primaryText={<div><strong>Container ID- </strong>{this.props.value.id}</div>} />
+
+    <ListItem
+    key={this.props.value.serviceID + 'service' + this.props.id}
+    style={{fontSize: '20px'}}
+    disabled = {true}
+    primaryText={<div><strong>Service ID- </strong>{this.props.value.serviceID}</div>} />
+
+    <ListItem
+    key={this.props.value.imageName + 'image' + this.props.id}
+    style={{fontSize: '20px'}}
+    disabled = {true}
+    primaryText={<div><strong>Image Name- </strong>{this.props.value.imageName}</div>} />
 
     <ListItem
     key={this.props.value.createdAt + 'c' + this.props.id}
     style={{fontSize: '20px'}}
     disabled = {true}
-    primaryText={<div><strong>Created At: </strong>{this.props.value.createdAt}</div>}/>
+    primaryText={<div><strong>Created </strong>{this.props.value.createdAt}</div>}/>
 
     <ListItem
     key={this.props.value.updatedAt + 'u' + this.props.id}
     style={{fontSize: '20px'}}
     disabled = {true}
-    primaryText={<div><strong>Updated At: </strong>{this.props.value.updatedAt}</div>} />
+    primaryText={<div><strong>Updated </strong>{this.props.value.updatedAt}</div>} />
     </List>
     </Paper>
     );

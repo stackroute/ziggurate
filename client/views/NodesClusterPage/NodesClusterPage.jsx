@@ -17,7 +17,7 @@ class NodesClusterPage extends React.Component {
 
 	getData = (filter) => {
 		$.ajax({
-			url: '/api/v1/nodes/' + filter,
+			url: '/api/v1/servers/' + filter,
 			type: 'GET',
 			datatype: 'json',
 			success: function(data) {
@@ -27,7 +27,7 @@ class NodesClusterPage extends React.Component {
 		});
 	}
 	componentDidMount = () => {
-		this.getData('all');
+		this.getData('All-Servers');
 	}
 
 	render() {

@@ -2,6 +2,14 @@ const Router = require('express').Router();
 const Docker = require('dockerode');
 const docker = new Docker({socketPath: '/var/run/docker.sock'});
 
+
+function serviceCount(callback, nodes, containers) {
+  docker.listServices(function(err, data) {
+      let services = data.length;
+      callback(nodes, containers, services);
+  });
+}
+
 function containerCount(callback, nodes) {
   docker.listTasks(function(err, data) {
     let containers = {};
@@ -16,7 +24,7 @@ function containerCount(callback, nodes) {
           containers.unhealthyContainers = containers.unhealthyContainers + 1;
         }
       }
-      callback(nodes, containers);
+      serviceCount(callback, nodes, containers);
       return;
   });
 }
@@ -42,12 +50,13 @@ function nodeCount(callback) {
 }
 
 Router.get('/admin', function(req, res) {
-    nodeCount(function(nodes, containers) {
+    nodeCount(function(nodes, containers, services) {
         let healthObject = {};
         healthObject.healthyNodes = nodes.healthyNodes;
         healthObject.unhealthyNodes = nodes.unhealthyNodes;
         healthObject.healthyContainers = containers.healthyContainers;
         healthObject.unhealthyContainers = containers.unhealthyContainers;
+        healthObject.services = services;
         res.json(healthObject);
       });
 });

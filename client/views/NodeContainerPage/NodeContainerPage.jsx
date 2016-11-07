@@ -24,11 +24,10 @@ class NodeContainerPage extends React.Component {
 
 	getData = (filter) => {
 		$.ajax({
-			url: '/api/v1/containers/node',
-			type: 'POST',
+			url: '/api/v1/containers/node/gnfkgnfk' + filter,
+			type: 'GET',
 			dataType: 'json',
 			contentType: 'application/json',
-			data: JSON.stringify({nodeId: filter}),
 			success: function(data) {
 				for(let key in data)
 				{
@@ -70,6 +69,7 @@ class NodeContainerPage extends React.Component {
 			</div>
 			<ContainerList
 			nodeName={this.props.params.nodeName}
+			nodePage={true}
 			containerListData={this.state.data}/>
 			<Dialog
 			title={'Containers on ' + this.props.params.nodeName}

@@ -1,9 +1,6 @@
 import React from 'react';
-import {Card, CardHeader, CardText, CardActions} from 'material-ui/Card';
-import FlatButton from 'material-ui/FlatButton';
+import {Card, CardHeader, CardText} from 'material-ui/Card';
 import {List, ListItem} from 'material-ui/List';
-import Divider from 'material-ui/Divider';
-import Badge from 'material-ui/Badge';
 import {Link} from 'react-router';
 
 class NodeCard extends React.Component {
@@ -19,16 +16,16 @@ class NodeCard extends React.Component {
     };
     render() {
      return(
-       <Card expanded={true} style={{marginLeft: '15px', marginTop: '20px', width: '400px'}}>
-       <CardHeader
-       title={this.props.cardContent.name}
-       titleStyle={{fontSize: '25px'}}
-       avatar={
-        <Badge
-        badgeContent={''}
-        primary={true}
-        badgeStyle={{background: this.state.color, right: '20px', top: '5px'}}/>}
-        style={{fontWeight: 'bold', background: '#9EA3B0'}}
+      <Link
+      to={'/nodesclusterpage/' + this.props.cardContent.id + '/' + this.props.cardContent.name}
+      style= {{ textDecoration: 'none'}}>
+      <Card
+      expanded={true}
+      style={{marginLeft: '30px', marginRight: '20px', marginTop: '40px', width: '380px'}}>
+      <CardHeader
+      title={this.props.cardContent.name}
+      titleStyle={{fontSize: '25px'}}
+      style={{fontWeight: 'bold', background: this.props.color}}
         />
         <CardText expandable={true} style={{textAlign: 'left'}}>
         <List>
@@ -36,30 +33,21 @@ class NodeCard extends React.Component {
         key={this.props.cardContent.role}
         style={{fontSize: '20px'}}
         disabled = {true}
-        primaryText={'Role:' + this.props.cardContent.role} />
+        primaryText={this.props.cardContent.role} />
         <ListItem
         key={this.props.cardContent.createdAt}
         style={{fontSize: '20px'}}
         disabled = {true}
-        primaryText={'CreatedAt:' + this.props.cardContent.createdAt} />
+        primaryText={'Created ' + this.props.cardContent.createdAt} />
         <ListItem
         key={this.props.cardContent.updatedAt + '' + this.props.cardContent.role}
         style={{fontSize: '20px'}}
         disabled = {true}
-        primaryText={'UpdatedAt:' + this.props.cardContent.updatedAt} />
+        primaryText={'Updated ' + this.props.cardContent.updatedAt} />
         </List>
-        <Divider />
         </CardText>
-        <CardActions>
-        <Link
-        to={'/nodesclusterpage/' + this.props.cardContent.id + '/' + this.props.cardContent.name}>
-        <FlatButton label='More..'
-        secondary={true}
-        onTouchTap={this.handleOpen}
-        style={{marginLeft: '70%'}}/>
-        </Link>
-        </CardActions>
         </Card>
+        </Link>
         );
  }
 }

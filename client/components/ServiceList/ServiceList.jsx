@@ -15,7 +15,7 @@ class ServiceList extends React.Component
   render() {
     let servicecard = this.props.serviceListData.map(function(value, index) {
      return (
-      <ServiceCard value={value} key={index} />);
+      <ServiceCard value={value} key={index} id={index + 1} />);
    });
     return (
       <div>
@@ -27,12 +27,8 @@ class ServiceList extends React.Component
        <div className='row center-xs'>
       <h1>AppName</h1>
       </div>
-      <div className='row'>
-      <div className='col-xs-offset-1 col-lg-10 col-sm-10 col-xs-10'>
       <div className='row center-xs'>
       {servicecard}
-      </div>
-      </div>
       </div>
       </div>
       );

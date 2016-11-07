@@ -75,16 +75,9 @@ module.exports = {
             issuer: config.USER_AGENT
           }, function(err3, jwt) {
             if(err3) { res.status(500).json(err3); return; }
-            if(response2.userType.toString() === 'admin') {
-              res
-              .cookie('token', jwt)
-              .redirect('/#/nodesclusterpage');
-            }
-            else{
               res
               .cookie('token', jwt)
               .redirect('/#/dashboard');
-            }
             return;
           });
         });

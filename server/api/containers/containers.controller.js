@@ -1,7 +1,4 @@
-const Router = require('express').Router();
-
 const Docker = require('dockerode');
-
 const docker = new Docker({socketPath: '/var/run/docker.sock'});
 
 
@@ -51,6 +48,8 @@ function getContainersFromDocker (res, data) {
         containerinfo.createdAt = calculateTime(new Date(data[i].CreatedAt).toLocaleString());
         containerinfo.updatedAt = calculateTime(new Date(data[i].UpdatedAt).toLocaleString());
         containerinfo.serviceID = data[i].ServiceID;
+        containerinfo.imageName = data[i].Spec.ContainerSpec.Image;
+        containerinfo.taskId = data[i].ID;
         if(data[i].DesiredState === 'shutdown')
         {
             containerinfo.desiredState = data[i].DesiredState;
@@ -70,11 +69,15 @@ function getContainersFromDocker (res, data) {
     }
 }
 
-Router.post('/node', (req, res) => {
-    docker.listTasks({filters: {node: [req.body.nodeId]}}, function(err, data)
-    {
+module.exports = {
+    containers: function(req, res) {
+        docker.listTasks({filters: {node: [req.params.nodeId]}}, function(err, data) {
+            getContainersFromDocker(res, data);
+        });
+    },
+    replicas: function(req, res) {
+     docker.listTasks({filters: {service: [req.params.serviceName]}}, function(err, data) {
         getContainersFromDocker(res, data);
     });
-});
-
-module.exports = Router;
+ }
+};

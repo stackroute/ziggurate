@@ -1,46 +1,76 @@
 import React from 'react';
-import Avatar from 'material-ui/Avatar';
-import {red300, orange200, cyan300, amberA200, white000} from 'material-ui/styles/colors';
+import Paper from 'material-ui/Paper';
+import Divider from 'material-ui/Divider';
+import {List, ListItem} from 'material-ui/List';
 import {Link} from 'react-router';
 
-const colour = [red300, orange200, cyan300, amberA200];
-let i = 0;
 class ServiceCard extends React.Component
 {
+
   static get propTypes() {
     return(
     {
-      value: React.PropTypes.object.isRequired
+      value: React.PropTypes.object.isRequired,
+      id: React.PropTypes.number.isRequired
     });
   }
-  render() {
-    i = i + 1;
-    if(i === 10) {
-      i = 0;
-    }
-    const style = {
-      height: 100,
-      width: 250,
-      marginLeft: 30,
-      marginTop: 80,
-      paddingTop: 50,
-      display: 'block-inline'
-    };
-    return(
-      <span>
-      <Link to='/services/replication' style={{textDecoration: 'none'}}>
-      <Avatar
-      color={white000}
-      backgroundColor={colour[i]}
-      size={70}
-      style={style}
-      >
-      {this.props.value.name}
-      </Avatar>
-      </Link>
-      </span>
-      );
-  }
-}
 
+  render() {
+    const style = {
+     width: '100%',
+     marginRight: 20,
+     marginTop: 40,
+     fontSize: 25,
+     display: 'inline-block'
+   };
+
+   return(
+     <Link
+     to={'/services/replicas/' + this.props.value.name}
+     style= {{ textDecoration: 'none', width: '100%'}}>
+
+     <Paper zDepth={3} style={style} >
+     <div style = {{backgroundColor: '#4CAF50'}}>
+     <h2 style = {{textAlign: 'center', margin: 0}}>{this.props.value.name}</h2>
+     <Divider/>
+
+     </div>
+     <List style={{textAlign: 'left'}}>
+     <ListItem
+     key={this.props.value.serviceId + 'service' + this.props.id}
+     style={{fontSize: '22px'}}
+     disabled = {true}
+     primaryText={<div><strong>Service ID- </strong>{this.props.value.serviceId}</div>} />
+
+     <ListItem
+     key={this.props.value.createdAt + 'create' + this.props.id}
+     style={{fontSize: '22px'}}
+     disabled = {true}
+     primaryText={<div><strong>Created </strong>{this.props.value.createdAt}</div>} />
+
+     <ListItem
+     key={this.props.value.updatedAt + 'update' + this.props.id}
+     style={{fontSize: '22px'}}
+     disabled = {true}
+     primaryText={<div><strong>Updated </strong>{this.props.value.updatedAt}</div>} />
+
+     <ListItem
+     key={this.props.value.replicas + 'replica' + this.props.id}
+     style={{fontSize: '22px'}}
+     disabled = {true}
+     primaryText={<div><strong>Running Replicas- </strong>{this.props.value.replicas}</div>} />
+
+     <ListItem
+     key={this.props.value.imageName + 'image' + this.props.id}
+     style={{fontSize: '22px'}}
+     disabled = {true}
+     primaryText={<div><strong>Image Name- </strong>{this.props.value.imageName}</div>} />
+
+     </List>
+     </Paper>
+     </Link>
+     );
+ }
+}
 export default ServiceCard;
+

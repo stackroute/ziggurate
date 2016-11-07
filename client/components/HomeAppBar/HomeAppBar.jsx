@@ -113,7 +113,7 @@ export default class HomeAppBar extends React.Component {
           <MenuItem
           leftIcon={<NodesIcon />}
           onTouchTap={() => { this.context.router.push('/nodesclusterpage'); }}>
-          Nodes
+          Servers
           </MenuItem>
           </div> :
           <MenuItem

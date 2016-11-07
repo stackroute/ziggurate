@@ -22,7 +22,7 @@ class DashBoard extends React.Component
 			<div className = 'row' style={{justifyContent: 'space-around'}}>
 			<div style= {{margin: '10px'}}>
 			<Avatar size={200} backgroundColor='#66BB6A'>{this.props.healthData.healthyNodes}</Avatar>
-			<h2 style={{textAlign: 'center'}}>Nodes</h2>
+			<h2 style={{textAlign: 'center'}}>Servers</h2>
 			</div>
 			<div style= {{margin: '10px'}}>
 			<Avatar size={200}
@@ -30,7 +30,7 @@ class DashBoard extends React.Component
 			<h2 style={{textAlign: 'center'}}>Containers</h2>
 			</div>
 			<div style= {{margin: '10px'}}>
-			<Avatar size={200} backgroundColor='#66BB6A'>C</Avatar>
+			<Avatar size={200} backgroundColor='#66BB6A'>{this.props.healthData.services}</Avatar>
 			<h2 style={{textAlign: 'center'}}>Services</h2>
 			</div>
 			<div style= {{margin: '10px'}}>
@@ -47,7 +47,7 @@ class DashBoard extends React.Component
 			<div className = 'row' style={{justifyContent: 'space-around'}}>
 			<div style= {{margin: '10px'}}>
 			<Avatar size={200} backgroundColor='#BF360C'>{this.props.healthData.unhealthyNodes}</Avatar>
-			<h2 style={{textAlign: 'center'}}>Nodes</h2>
+			<h2 style={{textAlign: 'center'}}>Servers</h2>
 			</div>
 			<div style= {{margin: '10px'}}>
 			<Avatar size={200}

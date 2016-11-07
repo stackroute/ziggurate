@@ -12,9 +12,11 @@ class Services extends React.Component {
 
 	getData = () => {
 		$.ajax({
-			url: 'http://localhost:3000/service',
-			type: 'GET',
+			url: '/api/v1/services/service',
+			type: 'POST',
+			data: JSON.stringify({hey: 'key'}),
 			datatype: 'JSON',
+			contentType: 'application/json',
 			success: function(data)
 			{
 				this.setState({serviceData: data});

@@ -171,7 +171,7 @@ function getDataFromDocker(res, mode) {
  });
 }
 
-Router.get('/all', (req, res) => {
+Router.get('/All-Servers', (req, res) => {
   getDataFromDocker(res, 'all');
 });
 

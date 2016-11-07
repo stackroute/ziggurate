@@ -2,34 +2,61 @@ import React from 'react';
 import $ from 'jquery';
 import HomeAppBar from '../../components/HomeAppBar';
 import DashBoard from '../../components/DashBoard';
+import jwt from 'jwt-decode';
+import cookie from 'react-cookie';
+
+function decodeToken(token) {
+  let decoded = jwt(token);
+  return(
+    decoded.roles[0]);
+}
 
 export default class DashboardView extends React.Component {
 
   state = {
-      data: {}
+    data: {},
+    userType: false
   };
 
   componentDidMount() {
-		this.getData();
-	}
+   const viewType = () => {
+    const token = cookie.load('token');
+    if(decodeToken(token) === 'admin') {
+      this.setState({userType: true
+      });
+      this.getData();
+    }
+    else
+    {
+      this.setState({userType: false
+      });
+    }
+  };
 
-	getData = () => {
-		$.ajax({
-			url: '/api/v1/dashboard/admin',
-			type: 'GET',
-			dataType: 'json',
-			success: function(data1) {
-        this.setState({data: data1});
-			}.bind(this)
-		});
-	}
+  viewType();
+}
 
-  render() {
-    return (
-      <div>
-        <HomeAppBar />
-        <DashBoard healthData={this.state.data} />
-      </div>
+getData = () => {
+  $.ajax({
+   url: '/api/v1/dashboard/admin',
+   type: 'GET',
+   dataType: 'json',
+   success: function(data1) {
+    this.setState({data: data1});
+  }.bind(this)
+});
+}
+
+render() {
+  return (
+    <div>
+    <HomeAppBar />
+    {
+      this.state.userType ?
+      <DashBoard healthData={this.state.data} /> :
+      null
+    }
+    </div>
     );
-  }
+}
 }

@@ -17,7 +17,7 @@ class NodesCluster extends React.Component {
 
 
 	state={
-		value: 'all'
+		value: 'All-Servers'
 	};
 
 	handleDropDownChange = (event, index, value) => {
@@ -32,7 +32,7 @@ class NodesCluster extends React.Component {
 		});
 
 		let nodeCard = this.props.serviceListData.map(function(data, index) {
-			let badgeColor = '#D32F2F';
+			let badgeColor = '#757575';
 			if(data.status === 'ready') {
 				badgeColor = '#4CAF50';
 			}
@@ -41,17 +41,20 @@ class NodesCluster extends React.Component {
 		});
 		return(
 			<div>
-			<div className = 'row first-xs'>
-			<SelectField autoWidth={true}
+			<div className = 'row end-xs'>
+			<SelectField
 			floatingLabelText={'Filter By'}
+			floatingLabelStyle={{fontSize: '22px', marginLeft: '-200px'}}
+			floatingLabelFixed={true}
 			value={this.state.value}
+			style={{ fontSize: '30px', width: '300px'}}
 			onChange={this.handleDropDownChange}>
 			{menuItems}
-			<MenuItem key={'all'} value={'all'} primaryText='All' />
+			<MenuItem key={'All-Servers'} value={'All-Servers'} primaryText='All Servers' />
 			</SelectField>
 			</div>
 			<div className='row center-xs'>
-			<h1>Nodes</h1>
+			<h1>{this.state.value}</h1>
 			</div>
 			<Divider />
 			<div className='row center-xs'>
