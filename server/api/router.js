@@ -12,5 +12,6 @@ Router.use('/servers', require('./servers'));
 Router.use('/containers', require('./containers'));
 Router.use('/dashboard', require('./admindashboard'));
 Router.use('/services', require('./services'));
+Router.use('/apps', require('./apps'));
 
 module.exports = Router;

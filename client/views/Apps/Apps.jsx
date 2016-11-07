@@ -8,12 +8,14 @@ class Apps extends React.Component {
 		appData: []
 	};
 	getData = () => {
+	let user = JSON.parse(localStorage.user);
 		$.ajax({
-			url: 'http://localhost:3000/app',
+			url: '/api/v1/apps/' + user.login,
 			type: 'GET',
 			datatype: 'JSON',
 			success: function(data)
 			{
+				console.log(data);
 				this.setState({appData: data});
 			}.bind(this)
 		});
