@@ -1,7 +1,6 @@
 const Docker = require('dockerode');
 const docker = new Docker({socketPath: '/var/run/docker.sock'});
 
-
 function calculateTime(data) {
   let date = new Date(data);
   let today = new Date();
@@ -72,12 +71,20 @@ function getContainersFromDocker (res, data) {
 module.exports = {
     containers: function(req, res) {
         docker.listTasks({filters: {node: [req.params.nodeId]}}, function(err, data) {
+            if(data === null) {
+                res.json({state: 'false'});
+                return;
+            }
             getContainersFromDocker(res, data);
         });
     },
     replicas: function(req, res) {
-     docker.listTasks({filters: {service: [req.params.serviceName]}}, function(err, data) {
+       docker.listTasks({filters: {service: [req.params.serviceName]}}, function(err, data) {
+        if(data === null) {
+            res.json({state: 'false'});
+            return;
+        }
         getContainersFromDocker(res, data);
     });
- }
+   }
 };
