@@ -1,5 +1,3 @@
-const Router = require('express').Router();
-
 const Docker = require('dockerode');
 const docker = new Docker({socketPath: '/var/run/docker.sock'});
 
@@ -90,7 +88,7 @@ function managerselection(data) {
     if(!Object.keys(data.ManagerStatus).includes('Leader')) {
       return 'Swarm Manager';
     }
-      return null;
+    return null;
   }
   return null;
 }
@@ -164,27 +162,23 @@ else if (mode === 'manager')
 return dockerSystems;
 }
 
-
 function getDataFromDocker(res, mode) {
   docker.listNodes(function(err, data) {
    res.json(createJson(data, mode));
  });
 }
 
-Router.get('/All-Servers', (req, res) => {
-  getDataFromDocker(res, 'all');
-});
-
-Router.get('/Swarm-Manager', (req, res) => {
-  getDataFromDocker(res, 'manager');
-});
-
-Router.get('/Swarm-Worker', (req, res) => {
-  getDataFromDocker(res, 'worker');
-});
-
-Router.get('/Swarm-Leader', (req, res) => {
-  getDataFromDocker(res, 'leader');
-});
-
-module.exports = Router;
+module.exports = {
+  AllServers: function(req, res) {
+    getDataFromDocker(res, 'all');
+  },
+  SwarmManager: function(req, res) {
+    getDataFromDocker(res, 'manager');
+  },
+  SwarmWorker: function(req, res) {
+    getDataFromDocker(res, 'worker');
+  },
+  SwarmLeader: function(req, res) {
+    getDataFromDocker(res, 'leader');
+  }
+};
