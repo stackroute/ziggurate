@@ -24,7 +24,7 @@ class NodeContainerPage extends React.Component {
 
 	getData = (filter) => {
 		$.ajax({
-			url: '/api/v1/containers/node/gnfkgnfk' + filter,
+			url: '/api/v1/containers/node/' + filter,
 			type: 'GET',
 			dataType: 'json',
 			contentType: 'application/json',
