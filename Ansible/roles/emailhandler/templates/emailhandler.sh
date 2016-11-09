@@ -23,7 +23,7 @@ sed -i 's/3/Left/g' nodes2.txt
 paste nodes1.txt nodes2.txt >> nodes3.txt
 
 cat nodes3.txt
-
+node /home/vagrant/app.js &
 mail -s "Nodes Health" {{ email_recipients }}  < nodes3.txt
 
 echo "hello-there: ${SERF_EVENT}. Data follows..."
@@ -65,5 +65,5 @@ if [ -f $file ] ; then
 fi
 
 while read line; do
-    printf "Dhiren Kumar\n"
+    printf "Ziggurate\n"
 done

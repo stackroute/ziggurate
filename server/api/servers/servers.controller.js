@@ -1,5 +1,8 @@
 const Docker = require('dockerode');
 const docker = new Docker({socketPath: '/var/run/docker.sock'});
+const redisCli = require('../../redis');
+const io = require('../../io');
+
 
 // This function will create the drop down list for the nodes page
 function createSelection(data) {
@@ -93,7 +96,7 @@ function managerselection(data) {
   return null;
 }
 // this function will return a json info for all swarm machines
-function createJson(data, mode) {
+function createJson(data, mode, socket) {
   let dockerSystems = [];
   let dock = createSelection(data);
   let leaderflag = true;
@@ -159,14 +162,30 @@ else if (mode === 'manager')
   dockerSystem.dropDown = dock;
   dockerSystems.push(dockerSystem);
 }
+if(socket === null) {
+  return dockerSystems;
+}
+socket.emit('nodes', dockerSystems);
 return dockerSystems;
 }
 
 function getDataFromDocker(res, mode) {
   docker.listNodes(function(err, data) {
-   res.json(createJson(data, mode));
+   res.json(createJson(data, mode, null));
  });
 }
+
+io.on('connection', function(socket) {
+  let drop = '';
+  socket.on('dropdown', function(data) {
+      drop = data;
+  });
+  redisCli.nodes.on('message', function() {
+    docker.listNodes(function (err, data) {
+      createJson(data, drop, socket);
+    });
+  });
+});
 
 module.exports = {
   AllServers: function(req, res) {

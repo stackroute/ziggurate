@@ -35,6 +35,5 @@ module.exports = function(inputApp, inputOptions) {
     setupMiddlewares(app);
     setupRestRoutes(app);
   }
-
   return app;
 };

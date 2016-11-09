@@ -34,7 +34,7 @@ class DashBoard extends React.Component
 			<h2 style={{textAlign: 'center'}}>Services</h2>
 			</div>
 			<div style= {{margin: '10px'}}>
-			<Avatar size={200} backgroundColor='#66BB6A'>D</Avatar>
+			<Avatar size={200} backgroundColor='#66BB6A'>--</Avatar>
 			<h2 style={{textAlign: 'center'}}>Apps</h2>
 			</div>
 			</div>
@@ -59,15 +59,9 @@ class DashBoard extends React.Component
 			<h2 style={{textAlign: 'center'}}>Services</h2>
 			</div>
 			<div style= {{margin: '10px'}}>
-			<Avatar size={200} backgroundColor='#BF360C'>D</Avatar>
+			<Avatar size={200} backgroundColor='#BF360C'>--</Avatar>
 			<h2 style={{textAlign: 'center'}}>Apps</h2>
 			</div>
-			</div>
-			</Paper>
-			<Paper zDepth={3} style={{width: '98%'}}>
-			<div>
-			<h1 style={{textAlign: 'center'}}>Data Events</h1>
-			<Divider/>
 			</div>
 			</Paper>
 			</div>

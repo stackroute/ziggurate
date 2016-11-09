@@ -1,21 +1,57 @@
 ---
 
- - hosts: docker-consul-workers
+ - hosts: consul-workers
+   become: true
+   roles:
+     - stackroute.consul
+     - stackroute.consul-Agent
+
+ - hosts: docker-workers
    become: true
    tasks:
      - name: add the user to docker group
        shell: >
          usermod -aG docker vagrant
+
+     - name: Add the Flags to access Local docker registery
+       copy: src=files/daemon.json dest=/etc/docker/ force=yes mode=0755
+
+     - name: Restart the docker service
+       shell: >
+         service docker restart       
+  
    roles:
      - stackroute.docker-experimental
      - stackroute.docker-compose
-     - stackroute.consul
-     - stackroute.consul-Agent
+ 
+ - hosts: docker-masters
+   become: true
+   tasks:
+     - name: add the user to docker group
+       shell: >
+         usermod -aG docker vagrant
+     - name: Add the Flags to access Local docker registery
+       copy: src=files/daemon.json dest=/etc/docker/ force=yes mode=0755
+
+     - name: Restart the docker service
+       shell: >
+         service docker restart       
+   roles:
+     - stackroute.docker-experimental
+     - stackroute.docker-compose
 
  - hosts: consul-server
    become: true
    tasks: 
-     - name: Install Mailutils and jq for emails
+     - name: make package json
+       shell: >
+          npm install -y
+
+     - name: install redis
+       shell: >
+          npm install redis --save-dev     
+
+    - name: Install Mailutils and jq for emails
        apt: name={{ item }} state=latest
        with_items :
          - mailutils

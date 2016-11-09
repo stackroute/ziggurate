@@ -15,7 +15,6 @@ class Apps extends React.Component {
 			datatype: 'JSON',
 			success: function(data)
 			{
-				console.log(data);
 				this.setState({appData: data});
 			}.bind(this)
 		});

@@ -7,5 +7,4 @@ gulpFile.js
 *.dab
 dist
 .htmlhintrc
-.eslintrc.js
 Jenkinsfile
