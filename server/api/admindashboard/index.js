@@ -1,1 +1,1 @@
-module.exports = require('./admindashboard');
+module.exports = require('./router');

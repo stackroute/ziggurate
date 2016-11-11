@@ -54,7 +54,7 @@ class App extends React.Component {
 			component={DashBoardView} onEnter={redirectIfNotLoggedIn}/>
 			<Route path='/deploy'
 			component={DeployBotView} onEnter={redirectIfNotLoggedIn}/>
-			<Route path='/apps'
+			<Route path='/app'
 			component={Apps} onEnter={redirectIfNotLoggedIn}/>
 			<Route path='/services'
 			component={Services} onEnter={redirectIfNotLoggedIn}/>

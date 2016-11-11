@@ -24,12 +24,13 @@ class AuthenticationPage extends React.Component {
     return(
       <div className='row center-xs'>
       <div className='col-xs-12 col-mg-12 col-lg-12'>
-      <h3
-      style={{marginTop: '100px'}}>Click on the below button to login to your GitHub Account</h3>
-      <img src="./components/AuthenticationPage/images.png" />
+      <img src="./components/AuthenticationPage/newzi4.jpg" />
       <div className='row center-xs'>
       <a href={this.state.githubUrl}>
-      <RaisedButton label="Login with GitHub" type="submit" primary={true} />
+      <RaisedButton
+      labelStyle= {{fontSize: '100px'}}
+      style={{height: '100%', width: '100%'}}
+      label="Login with GitHub" type="submit" primary={true} />
       </a>
       </div>
       </div>

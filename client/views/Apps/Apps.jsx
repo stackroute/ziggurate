@@ -1,5 +1,5 @@
 import React from 'react';
-import $ from 'jquery';
+// import $ from 'jquery';
 import HomeAppBar from '../../components/HomeAppBar';
 import AppList from '../../components/AppList';
 
@@ -7,7 +7,7 @@ class Apps extends React.Component {
 	state= {
 		appData: []
 	};
-	getData = () => {
+/*	getData = () => {
 	let user = JSON.parse(localStorage.user);
 		$.ajax({
 			url: '/api/v1/apps/' + user.login,
@@ -18,9 +18,9 @@ class Apps extends React.Component {
 				this.setState({appData: data});
 			}.bind(this)
 		});
-	}
+	}*/
 	componentDidMount = () => {
-		this.getData();
+		// this.getData();
 	}
 
 	render() {

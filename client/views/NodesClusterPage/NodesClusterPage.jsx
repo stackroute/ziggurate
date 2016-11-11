@@ -3,7 +3,6 @@ import HomeAppBar from '../../components/HomeAppBar';
 import NodesCluster from '../../components/NodesCluster';
 import $ from 'jquery';
 
-let fil = 'all';
 class NodesClusterPage extends React.Component {
 
 	state= {
@@ -13,7 +12,6 @@ class NodesClusterPage extends React.Component {
 
 	handleFilter = (filter) =>
 	{
-		fil = filter;
 		this.getData(filter);
 	};
 
@@ -32,7 +30,6 @@ class NodesClusterPage extends React.Component {
 
 	componentDidMount = () => {
 			let socket = io();
-			socket.emit('dropdown', fil);
 			socket.on('nodes', function(data) {
 				this.setState({data: data});
 				this.setState({dropdown: data[0].dropDown});
