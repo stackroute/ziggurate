@@ -29,11 +29,6 @@ class NodesClusterPage extends React.Component {
 
 
 	componentDidMount = () => {
-			let socket = io();
-			socket.on('nodes', function(data) {
-				this.setState({data: data});
-				this.setState({dropdown: data[0].dropDown});
-		}.bind(this));
 		this.getData('All-Servers');
 	}
 

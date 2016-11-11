@@ -21,6 +21,7 @@ function setupRestRoutes(app) {
   return app;
 }
 
+
 module.exports = function(inputApp, inputOptions) {
   const app = inputApp || createApp();
   const options = inputOptions || {};
@@ -35,5 +36,6 @@ module.exports = function(inputApp, inputOptions) {
     setupMiddlewares(app);
     setupRestRoutes(app);
   }
+
   return app;
 };

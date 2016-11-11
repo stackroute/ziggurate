@@ -1,9 +1,6 @@
 const Docker = require('dockerode');
 const docker = new Docker({socketPath: '/var/run/docker.sock'});
 
-const redisCli = require('../../redis');
-const io = require('../../io');
-
 function serviceCount(callback, nodes, containers) {
   docker.listServices(function(err, data) {
     let services = data.length;
@@ -49,22 +46,6 @@ function nodeCount(callback) {
     return;
   });
 }
-
-
-io.on('connection', function(socket) {
-  redisCli.nodes.on('message', function() {
-    nodeCount(function(nodes, containers, services) {
-      let healthObject = {};
-      healthObject.healthyNodes = nodes.healthyNodes;
-      healthObject.unhealthyNodes = nodes.unhealthyNodes;
-      healthObject.healthyContainers = containers.healthyContainers;
-      healthObject.unhealthyContainers = containers.unhealthyContainers;
-      healthObject.services = services;
-      socket.emit('admindash', healthObject);
-    });
-  });
-});
-
 
 module.exports = {
   admin: function(req, res) {

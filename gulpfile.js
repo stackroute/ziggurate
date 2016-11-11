@@ -77,7 +77,11 @@ gulp.task('htmlhint', function() {
   .pipe(htmlhint.failReporter());
 });
 
-gulp.task('webpack-dev-server', ['eslint'], function() {
+gulp.task('io', function() {
+  require('./server/io')();
+});
+
+gulp.task('webpack-dev-server', ['eslint', 'io'], function() {
   const webpackConfig = require('./webpack.config');
   webpackConfig.devtool = 'eval-source-map';
   webpackConfig.debug = true;

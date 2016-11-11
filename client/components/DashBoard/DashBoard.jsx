@@ -33,10 +33,6 @@ class DashBoard extends React.Component
 			<Avatar size={200} backgroundColor='#66BB6A'>{this.props.healthData.services}</Avatar>
 			<h2 style={{textAlign: 'center'}}>Services</h2>
 			</div>
-			<div style= {{margin: '10px'}}>
-			<Avatar size={200} backgroundColor='#66BB6A'>--</Avatar>
-			<h2 style={{textAlign: 'center'}}>Apps</h2>
-			</div>
 			</div>
 			</Paper>
 			<Paper zDepth={3} style={{width: '98%'}}>
@@ -57,10 +53,6 @@ class DashBoard extends React.Component
 			<div style= {{margin: '10px'}}>
 			<Avatar size={200} backgroundColor='#BF360C'>--</Avatar>
 			<h2 style={{textAlign: 'center'}}>Services</h2>
-			</div>
-			<div style= {{margin: '10px'}}>
-			<Avatar size={200} backgroundColor='#BF360C'>--</Avatar>
-			<h2 style={{textAlign: 'center'}}>Apps</h2>
 			</div>
 			</div>
 			</Paper>

@@ -1,8 +1,5 @@
 const Docker = require('dockerode');
 const docker = new Docker({socketPath: '/var/run/docker.sock'});
-const redisCli = require('../../redis');
-const io = require('../../io');
-
 
 // This function will create the drop down list for the nodes page
 function createSelection(data) {
@@ -175,19 +172,12 @@ function getDataFromDocker(res, mode) {
  });
 }
 
-io.on('connection', function(socket) {
-  let drop = '';
-  socket.on('dropdown', function(data) {
-      drop = data;
-  });
-  redisCli.nodes.on('message', function() {
-    docker.listNodes(function (err, data) {
-      createJson(data, drop, socket);
-    });
-  });
-});
-
 module.exports = {
+  socketData: function(socket) {
+    docker.listNodes(function (err, data) {
+      createJson(data, 'all', socket);
+    });
+  },
   AllServers: function(req, res) {
     getDataFromDocker(res, 'all');
   },

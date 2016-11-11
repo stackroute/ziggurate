@@ -57848,8 +57848,6 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var fil = 'all';
-
 	var NodesClusterPage = function (_React$Component) {
 		_inherits(NodesClusterPage, _React$Component);
 
@@ -57868,7 +57866,6 @@
 				data: [],
 				dropdown: []
 			}, _this.handleFilter = function (filter) {
-				fil = filter;
 				_this.getData(filter);
 			}, _this.getData = function (filter) {
 				_jquery2.default.ajax({
@@ -57882,9 +57879,9 @@
 				});
 			}, _this.componentDidMount = function () {
 				var socket = io();
-				socket.on('nodes', function (data) {
-					this.setState({ data: data });
-					this.setState({ dropdown: data[0].dropDown });
+				socket.on('nodes', function (data1) {
+					this.setState({ data: data1 });
+					// this.setState({dropdown: data1[0].dropDown});
 				}.bind(_this));
 				_this.getData('All-Servers');
 			}, _temp), _possibleConstructorReturn(_this, _ret);
@@ -64011,20 +64008,6 @@
 									{ style: { textAlign: 'center' } },
 									'Services'
 								)
-							),
-							_react2.default.createElement(
-								'div',
-								{ style: { margin: '10px' } },
-								_react2.default.createElement(
-									_Avatar2.default,
-									{ size: 200, backgroundColor: '#66BB6A' },
-									'--'
-								),
-								_react2.default.createElement(
-									'h2',
-									{ style: { textAlign: 'center' } },
-									'Apps'
-								)
 							)
 						)
 					),
@@ -64085,20 +64068,6 @@
 									'h2',
 									{ style: { textAlign: 'center' } },
 									'Services'
-								)
-							),
-							_react2.default.createElement(
-								'div',
-								{ style: { margin: '10px' } },
-								_react2.default.createElement(
-									_Avatar2.default,
-									{ size: 200, backgroundColor: '#BF360C' },
-									'--'
-								),
-								_react2.default.createElement(
-									'h2',
-									{ style: { textAlign: 'center' } },
-									'Apps'
 								)
 							)
 						)
