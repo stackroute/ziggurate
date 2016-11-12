@@ -51,7 +51,7 @@ let repopath;
     callback(null, services);
    }
     ], function(err, results) {
-        socket.emit('services', results.pop);
+        socket.emit('services', results.pop());
     });
 }
 
