@@ -2,7 +2,10 @@ const io = require('socket.io')();
 // const redisCli = require('./redis.js');
 // const server = require('./api/servers');
 module.exports = function(http) {
-   io.on('connection', function() {
+   io.on('connection', function(socket) {
+      socket.on('nodes', function(msg) {
+         console.log(msg);
+      })
       console.log('connected');
    });
    if(http) {

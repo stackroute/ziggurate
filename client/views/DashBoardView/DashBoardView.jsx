@@ -20,6 +20,8 @@ export default class DashboardView extends React.Component {
   };
 
   componentDidMount() {
+    let socket = io();
+    socket.emit('nodes', 'hey');
     const viewType = () => {
       const token = cookie.load('token');
       if(decodeToken(token) === 'admin') {

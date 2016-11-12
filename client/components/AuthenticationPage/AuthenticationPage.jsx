@@ -24,7 +24,7 @@ class AuthenticationPage extends React.Component {
     return(
       <div className='row center-xs'>
       <div className='col-xs-12 col-mg-12 col-lg-12'>
-      <img src="./components/AuthenticationPage/newzi4.jpg" />
+      <img src="./components/AuthenticationPage/ziggurate.jpg" />
       <div className='row center-xs'>
       <a href={this.state.githubUrl}>
       <RaisedButton

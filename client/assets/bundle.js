@@ -57878,11 +57878,6 @@
 					}.bind(_this)
 				});
 			}, _this.componentDidMount = function () {
-				var socket = io();
-				socket.on('nodes', function (data1) {
-					this.setState({ data: data1 });
-					// this.setState({dropdown: data1[0].dropDown});
-				}.bind(_this));
 				_this.getData('All-Servers');
 			}, _temp), _possibleConstructorReturn(_this, _ret);
 		}
@@ -63219,7 +63214,7 @@
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'col-xs-12 col-mg-12 col-lg-12' },
-	          _react2.default.createElement('img', { src: './components/AuthenticationPage/newzi4.jpg' }),
+	          _react2.default.createElement('img', { src: './components/AuthenticationPage/ziggurate.jpg' }),
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'row center-xs' },
@@ -63847,10 +63842,7 @@
 	      var _this2 = this;
 
 	      var socket = io();
-	      socket.on('admindash', function (data1) {
-	        this.setState({ data: data1 });
-	      }.bind(this));
-
+	      socket.emit('nodes', 'hey');
 	      var viewType = function viewType() {
 	        var token = _reactCookie2.default.load('token');
 	        if (decodeToken(token) === 'admin') {
