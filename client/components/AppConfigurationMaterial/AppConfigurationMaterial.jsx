@@ -10,7 +10,7 @@ const styles = {
   button: {
     marginTop: '50px'
   }
-}
+};
 
 export default class AppConfigurationMaterial extends React.Component {
   render() {

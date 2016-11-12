@@ -1,12 +1,13 @@
 import React from 'react';
-import {Table, TableHeader, TableBody, TableRow, TableHeaderColumn, TableRowColumn} from 'material-ui/Table';
+import {Table, TableHeader, TableBody, TableRow} from 'material-ui/Table';
+import {TableHeaderColumn, TableRowColumn} from 'material-ui/Table';
 import RaisedButton from 'material-ui/RaisedButton';
 
 const styles = {
   button: {
     marginTop: '50px'
   }
-}
+};
 
 export default class ServiceConfigurationMaterial extends React.Component {
   render() {
@@ -26,7 +27,8 @@ export default class ServiceConfigurationMaterial extends React.Component {
             displayRowCheckbox={true} >
             <TableRow>
               <TableRowColumn>tasker</TableRowColumn>
-              <TableRowColumn>MONGO_URL, PORT, GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET</TableRowColumn>
+              <TableRowColumn>MONGO_URL, PORT, GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET
+              </TableRowColumn>
             </TableRow>
           </TableBody>
         </Table>

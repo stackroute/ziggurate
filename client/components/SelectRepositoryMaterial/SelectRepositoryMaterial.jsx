@@ -15,7 +15,12 @@ export default class SelectRepositoryMaterial extends React.Component {
       branches: []
     };
   }
-
+  static get propTypes() {
+    return(
+      {
+        setRepository: React.PropTypes.func.isRequired
+      });
+  }
   componentDidMount() {
     request
       .get('/api/v1/repos')
@@ -74,7 +79,9 @@ export default class SelectRepositoryMaterial extends React.Component {
             label="Next"
             primary={true}
             disabled={!this.state.selectedBranch}
-            onClick={() => {this.props.setRepository(this.state.selectedRepository, this.state.selectedBranch)}} />
+            onClick={() => {
+              this.props.setRepository(this.state.selectedRepository, this.state.selectedBranch);}
+            } />
         </div>
       </div>
     );

@@ -83,7 +83,7 @@ gulp.task('io', function() {
 
 gulp.task('webpack-dev-server', ['eslint', 'io'], function() {
   const webpackConfig = require('./webpack.config');
-  webpackConfig.devtool = 'eval-source-map';
+  webpackConfig.devtool = 'cheap-eval-source-map';
   webpackConfig.debug = true;
   webpackConfig.entry.app.unshift('webpack-dev-server/client?http://localhost:8080/',
     'webpack/hot/dev-server');

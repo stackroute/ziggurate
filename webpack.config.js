@@ -1,6 +1,7 @@
 const path = require('path');
 
 module.exports = {
+  devtool: 'cheap-eval-source-map',
   entry: {
     app: [path.join(__dirname, 'client', 'app.jsx')]
   },

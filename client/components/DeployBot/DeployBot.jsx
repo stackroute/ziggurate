@@ -6,8 +6,6 @@ import SelectRepositoryMaterial from '../SelectRepositoryMaterial';
 import ServiceConfigurationMaterial from '../ServiceConfigurationMaterial';
 import AppConfigurationMaterial from '../AppConfigurationMaterial';
 
-import io from 'socket.io-client';
-
 const styles = {
   paper: {
     padding: '50px',
@@ -15,7 +13,7 @@ const styles = {
   }
 };
 
-const socket = io('');
+const socket = io();
 
 export default class DeployBot extends React.Component {
   constructor() {
@@ -32,13 +30,13 @@ export default class DeployBot extends React.Component {
     }
 
     if(this.state.servicesConfiguration) {
-      app.unshift(<AppConfigurationMaterial />);
+      arr.unshift(<AppConfigurationMaterial />);
     }
 
-    const items = arr.map((item,index) => {
+    const items = arr.map((item, index) => {
       return (
         <Paper
-          key={arr.length-index}
+          key={arr.length - index}
           zDepth={2}
           style={styles.paper} >
           {item}
@@ -58,8 +56,7 @@ export default class DeployBot extends React.Component {
   }
 
   handleSetRepository(repositoryName, branchName) {
-    console.log('cloning');
-    socket.emit('clone', 'msg');
+    socket.emit('clone', {repoName: repositoryName, branchName: branchName, userName: 'nischay30'});
     this.setState({selectedRepository: repositoryName, selectedBranch: branchName});
   }
 }
