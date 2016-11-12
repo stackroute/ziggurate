@@ -41,7 +41,7 @@ export default class SelectRepositoryMaterial extends React.Component {
 
     const branches = this.state.branches.map((branch) => {
       return (
-        <MenuItem branch={branch} value={branch} label={branch} primaryText={branch} />
+        <MenuItem key={branch} value={branch} label={branch} primaryText={branch} />
       );
     });
 
@@ -71,10 +71,10 @@ export default class SelectRepositoryMaterial extends React.Component {
         <div
           style={{paddingTop: '50px'}}>
           <RaisedButton
-
             label="Next"
             primary={true}
-            disabled={!this.state.selectedBranch} />
+            disabled={!this.state.selectedBranch}
+            onClick={() => {this.props.setRepository(this.state.selectedRepository, this.state.selectedBranch)}} />
         </div>
       </div>
     );
