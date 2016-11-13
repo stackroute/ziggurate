@@ -48,6 +48,17 @@ function nodeCount(callback) {
 }
 
 module.exports = {
+  socketData: function(socket) {
+    nodeCount(function(nodes, containers, services) {
+      let healthObject = {};
+      healthObject.healthyNodes = nodes.healthyNodes;
+      healthObject.unhealthyNodes = nodes.unhealthyNodes;
+      healthObject.healthyContainers = containers.healthyContainers;
+      healthObject.unhealthyContainers = containers.unhealthyContainers;
+      healthObject.services = services;
+      socket.emit('admindash', healthObject);
+    });
+  },
   admin: function(req, res) {
     nodeCount(function(nodes, containers, services) {
       let healthObject = {};

@@ -48,13 +48,18 @@ gulp.task('copy:server', ['clean'], function() {
   .pipe(gulp.dest('dist/server/'));
 });
 
+gulp.task('copy:images', ['clean'], function() {
+  gulp.src(['client/images/*.jpg'])
+  .pipe(gulp.dest('dist/server/public/images'));
+});
+
 gulp.task('clean', function() {
   return gulp.src('dist', {read: false})
   .pipe(clean());
 });
 
 
-gulp.task('copy', ['copy:package.json', 'copy:server', 'copy:fonts']);
+gulp.task('copy', ['copy:package.json', 'copy:server', 'copy:fonts', 'copy:images']);
 
 gulp.task('build', ['eslint', 'usemin', 'copy']);
 

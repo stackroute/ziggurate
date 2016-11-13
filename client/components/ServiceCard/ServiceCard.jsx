@@ -11,7 +11,8 @@ class ServiceCard extends React.Component
     return(
     {
       value: React.PropTypes.object.isRequired,
-      id: React.PropTypes.number.isRequired
+      id: React.PropTypes.number.isRequired,
+      appName: React.PropTypes.string.isRequired
     });
   }
 
@@ -26,7 +27,8 @@ class ServiceCard extends React.Component
 
    return(
      <Link
-     to={'/services/replicas/' + this.props.value.name}
+     to={'/' + this.props.appName +
+     '/services/' + this.props.value.name + '/replicas'}
      style= {{ textDecoration: 'none', width: '100%'}}>
 
      <Paper zDepth={3} style={style} >

@@ -38,6 +38,7 @@ class ReplicaPage extends React.Component {
         <div className='container-fluid'>
 				<ServiceReplicationInstances
         serviceName={this.props.params.serviceName}
+        appName={this.props.params.appname}
         />
 				<ContainerList
         nodePage={false}

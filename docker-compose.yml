@@ -4,7 +4,3 @@ services:
   image: 172.23.238.253:5000/mongo 
   ports:
     - 27017:27017
- neo4j:
-  image: 172.23.238.253:5000/neo4j 
-  ports:
-    - 7474:7474

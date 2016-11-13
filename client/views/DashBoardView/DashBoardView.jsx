@@ -6,6 +6,8 @@ import UserDashBoard from '../../components/UserDashBoard';
 import jwt from 'jwt-decode';
 import cookie from 'react-cookie';
 
+const socket = io();
+
 function decodeToken(token) {
   let decoded = jwt(token);
   return(
@@ -20,8 +22,6 @@ export default class DashboardView extends React.Component {
   };
 
   componentDidMount() {
-    let socket = io();
-    socket.emit('nodes', 'hey');
     const viewType = () => {
       const token = cookie.load('token');
       if(decodeToken(token) === 'admin') {
@@ -47,6 +47,10 @@ export default class DashboardView extends React.Component {
       this.setState({data: data1});
     }.bind(this)
   });
+
+    socket.on('admindash', (data1) => {
+      this.setState({data: data1});
+    });
   }
 
   render() {

@@ -1,33 +1,10 @@
-let mongodb = require('mongodb');
-let MongoClient = mongodb.MongoClient;
-let url = 'mongodb://localhost/my_db';
+const schema = require('../../schema.model');
 
 module.exports = {
-	getApps: function(req, res) {
-		MongoClient.connect(url, function(err, db) {
-			if(err)
-			{
-					res.json({state: false});
-			}
-			else
-			{
-				let collection = db.collection('userData');
-				collection.find({username: req.params.userId}).toArray(function(err1, result) {
-					if(err1)
-					{
-							res.json({state: false});
-					}
-					else if(result.length)
-					{
-						res.json(result);
-					}
-					else
-					{
-						res.json({state: false});
-					}
-				});
-			}
-			db.close();
+	getUserApps: function(req, res) {
+		schema.UserSchema.find({username: req.params.username}, function(err, appsname) {
+			res.json(appsname);
 		});
 	}
 };
+

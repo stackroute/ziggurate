@@ -9,13 +9,18 @@ class ServiceList extends React.Component
   static get propTypes() {
     return(
     {
-      serviceListData: React.PropTypes.array.isRequired
+      serviceListData: React.PropTypes.array.isRequired,
+      appName: React.PropTypes.string.isRequired
     });
   }
   render() {
-    let servicecard = this.props.serviceListData.map(function(value, index) {
+    let servicecard = this.props.serviceListData.map( (value, index) => {
      return (
-      <ServiceCard value={value} key={index} id={index + 1} />);
+      <ServiceCard appName={this.props.appName}
+      value={value}
+      key={index}
+      id={index + 1}
+      />);
    });
     return (
       <div>
@@ -25,7 +30,7 @@ class ServiceList extends React.Component
       </Link>
        </div>
        <div className='row center-xs'>
-      <h1>AppName</h1>
+      <h1>{this.props.appName}</h1>
       </div>
       <div className='row center-xs'>
       {servicecard}

@@ -3,6 +3,7 @@ import HomeAppBar from '../../components/HomeAppBar';
 import NodesCluster from '../../components/NodesCluster';
 import $ from 'jquery';
 
+const socket = io();
 class NodesClusterPage extends React.Component {
 
 	state= {
@@ -20,12 +21,15 @@ class NodesClusterPage extends React.Component {
 			url: '/api/v1/servers/' + filter,
 			type: 'GET',
 			datatype: 'json',
-			success: function(data) {
-				this.setState({dropdown: data[0].dropDown});
-				this.setState({data: data});
+			success: function(data1) {
+				this.setState({dropdown: data1[0].dropDown, data: data1});
 			}.bind(this)
 		});
-	}
+
+		socket.on('servers', (data1) => {
+			this.setState({dropdown: data1[0].dropDown, data: data1});
+		});
+	};
 
 
 	componentDidMount = () => {

@@ -1,4 +1,8 @@
 const io = require('socket.io')();
+const servers = require('./api/servers/servers.controller');
+const admindash = require('./api/admindashboard/admindashboard.controller');
+
+const redis = require('./redis');
 const async = require('async');
 const fs = require('fs');
 const yaml = require('yamljs');
@@ -60,6 +64,10 @@ module.exports = function(http) {
       socket.on('clone', (data) => {
          clone(data.repoName, data.branchName, data.userName, socket);
       });
+      redis.nodes.on('message', function() {
+        servers.socketData(socket);
+        admindash.socketData(socket);
+      });
       console.log('connected');
    });
    if(http) {
@@ -71,4 +79,4 @@ module.exports = function(http) {
          console.log('server listening on 8081');
       });
    }
-}
+};

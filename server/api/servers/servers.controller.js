@@ -162,7 +162,7 @@ else if (mode === 'manager')
 if(socket === null) {
   return dockerSystems;
 }
-socket.emit('nodes', dockerSystems);
+socket.emit('servers', dockerSystems);
 return dockerSystems;
 }
 

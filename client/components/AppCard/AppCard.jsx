@@ -31,10 +31,10 @@ class AppCard extends React.Component
    return(
 
     <span>
-    <Link to='/services' style={{textDecoration: 'none', width: '100%'}}>
-
+    <Link to= {'/' + this.props.value.appname + '/services'}
+    style={{textDecoration: 'none', width: '100%'}}>
     <Paper zDepth={3} style={style} >
-    <h3>{this.props.value.name}</h3>
+    <h3>{this.props.value.appname}</h3>
     </Paper>
     </Link>
     </span>

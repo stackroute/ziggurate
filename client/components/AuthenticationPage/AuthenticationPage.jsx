@@ -2,7 +2,6 @@ import React from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
 import $ from 'jquery';
 
-
 class AuthenticationPage extends React.Component {
 
   state= {
@@ -24,11 +23,11 @@ class AuthenticationPage extends React.Component {
     return(
       <div className='row center-xs'>
       <div className='col-xs-12 col-mg-12 col-lg-12'>
-      <img src="./components/AuthenticationPage/ziggurate.jpg" />
+      <img src="./images/ziggurate.jpg" />
       <div className='row center-xs'>
       <a href={this.state.githubUrl}>
       <RaisedButton
-      labelStyle= {{fontSize: '100px'}}
+      labelStyle= {{fontSize: '98px'}}
       style={{height: '100%', width: '100%'}}
       label="Login with GitHub" type="submit" primary={true} />
       </a>

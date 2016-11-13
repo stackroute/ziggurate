@@ -21,7 +21,7 @@ class AppList extends React.Component
     return(
       <div>
       <div className='row'>
-      <img src='./components/AppList/apps.jpg'
+      <img src='./images/apps.jpg'
       style={{width: '50px', height: '50px', marginTop: '14px'}} />
       <h2 >
       App DashBoard

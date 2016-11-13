@@ -10,13 +10,17 @@ class Services extends React.Component {
 		serviceData: []
 	};
 
+	static get propTypes () {
+		return(
+		{
+				params: React.PropTypes.object.isRequired
+		});
+	}
 	getData = () => {
 		$.ajax({
-			url: '/api/v1/services/service',
-			type: 'POST',
-			data: JSON.stringify({hey: 'key'}),
+			url: '/api/v1/services/' + this.props.params.appname,
+			type: 'GET',
 			datatype: 'JSON',
-			contentType: 'application/json',
 			success: function(data)
 			{
 				this.setState({serviceData: data});
@@ -32,7 +36,8 @@ class Services extends React.Component {
 			<div>
 			<HomeAppBar />
 			<div className='container-fluid'>
-			<ServiceList serviceListData={this.state.serviceData}/>
+			<ServiceList serviceListData={this.state.serviceData}
+			appName={this.props.params.appname}/>
 			</div>
 			</div>
 			);

@@ -54,11 +54,11 @@ class App extends React.Component {
 			component={DashBoardView} onEnter={redirectIfNotLoggedIn}/>
 			<Route path='/deploy'
 			component={DeployBotView} onEnter={redirectIfNotLoggedIn}/>
-			<Route path='/app'
+			<Route path='/apps'
 			component={Apps} onEnter={redirectIfNotLoggedIn}/>
-			<Route path='/services'
+			<Route path='/:appname/services'
 			component={Services} onEnter={redirectIfNotLoggedIn}/>
-			<Route path='/services/replicas/:serviceName'
+			<Route path='/:appname/services/:serviceName/replicas'
 			component={ReplicaPage} onEnter={redirectIfNotLoggedIn}/>
 			<Route path='/nodesclusterpage'
 			component={NodesClusterPage} onEnter={redirectIfNotLoggedIn}/>

@@ -129,7 +129,7 @@ export default class HomeAppBar extends React.Component {
         </MenuItem>
         <MenuItem
         leftIcon={<AppIcon />}
-        onTouchTap={() => { this.context.router.push('/services'); }}>
+        onTouchTap={() => { this.context.router.push('/apps'); }}>
         Deployed Apps
         </MenuItem>
         <MenuItem
