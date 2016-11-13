@@ -9,7 +9,6 @@ const User = new mongoose.Schema({
 const Apps = new mongoose.Schema({
  appname: {type: String, required: true, unique: true},
  services: [{
-  servicename: {type: String, required: true},
   serviceId: {type: String, required: true}
 }]
 });

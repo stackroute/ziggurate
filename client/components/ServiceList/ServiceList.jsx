@@ -14,7 +14,7 @@ class ServiceList extends React.Component
     });
   }
   render() {
-    let servicecard = this.props.serviceListData.map( (value, index) => {
+    let servicecard = this.props.serviceListData.map((value, index) => {
      return (
       <ServiceCard appName={this.props.appName}
       value={value}
