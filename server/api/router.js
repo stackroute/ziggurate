@@ -11,6 +11,7 @@ Router.use('/repo', require('./repos'));
 Router.use('/servers', require('./servers'));
 Router.use('/containers', require('./containers'));
 Router.use('/dashboard', require('./admindashboard'));
+Router.use('/userdashboard', require('./userdashboard'));
 Router.use('/services', require('./services'));
 Router.use('/apps', require('./apps'));
 

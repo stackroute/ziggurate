@@ -65,7 +65,7 @@ module.exports = {
        schema.AppSchema.find({appname: req.params.appname}, function(err, service) {
         let serviceArray = [];
         for(let i = 0; i < service[0].services.length; i = i + 1) {
-          let serviceinfo = docker.getService(service[0].services[i].servicename);
+          let serviceinfo = docker.getService(service[0].services[i].serviceId);
           serviceinfo.inspect(function(err1, data) {
             serviceArray.push(data);
             if(i === service[0].services.length - 1) {
@@ -77,8 +77,6 @@ module.exports = {
      }, (serviceArray, callback) => {
       getServicesFromDocker(res, serviceArray);
       callback(null);
-    }], function() {
-      console.log('done services page');
-    });
+    }], function() { });
   }
 };

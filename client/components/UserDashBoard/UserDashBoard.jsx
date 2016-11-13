@@ -21,16 +21,11 @@ class UserDashBoard extends React.Component
          </div>
          <div className = 'row' style={{justifyContent: 'space-around'}}>
          <div style= {{margin: '10px'}}>
-         <Avatar size={200}
-         backgroundColor='#66BB6A'>{this.props.healthData.healthyContainers}</Avatar>
-         <h2 style={{textAlign: 'center'}}>Containers</h2>
-         </div>
-         <div style= {{margin: '10px'}}>
          <Avatar size={200} backgroundColor='#66BB6A'>{this.props.healthData.services}</Avatar>
          <h2 style={{textAlign: 'center'}}>Services</h2>
          </div>
          <div style= {{margin: '10px'}}>
-         <Avatar size={200} backgroundColor='#66BB6A'>--</Avatar>
+         <Avatar size={200} backgroundColor='#66BB6A'>{this.props.healthData.apps}</Avatar>
          <h2 style={{textAlign: 'center'}}>Apps</h2>
          </div>
          </div>
@@ -41,11 +36,6 @@ class UserDashBoard extends React.Component
          <Divider/>
          </div>
          <div className = 'row' style={{justifyContent: 'space-around'}}>
-         <div style= {{margin: '10px'}}>
-         <Avatar size={200}
-         backgroundColor='#BF360C'>{this.props.healthData.unhealthyContainers}</Avatar>
-         <h2 style={{textAlign: 'center'}}>Containers</h2>
-         </div>
          <div style= {{margin: '10px'}}>
          <Avatar size={200} backgroundColor='#BF360C'>--</Avatar>
          <h2 style={{textAlign: 'center'}}>Services</h2>

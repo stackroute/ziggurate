@@ -73,7 +73,5 @@ module.exports = function(RepoPath, serviceName, username, appname) {
   app.save(function() {
     callback(null);
   });
-}], function() {
-  console.log('done');
-});
+}], function() { });
 };

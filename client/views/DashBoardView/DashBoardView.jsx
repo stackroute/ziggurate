@@ -18,6 +18,7 @@ export default class DashboardView extends React.Component {
 
   state = {
     data: {},
+    userdata: {},
     userType: false
   };
 
@@ -25,20 +26,31 @@ export default class DashboardView extends React.Component {
     const viewType = () => {
       const token = cookie.load('token');
       if(decodeToken(token) === 'admin') {
-        this.setState({userType: true
-        });
-        this.getData();
+        this.setState({userType: true});
+        this.getAdminData();
       }
       else
       {
-        this.setState({userType: false
-        });
+        this.setState({userType: false});
+        this.getUserData();
       }
     };
     viewType();
   }
 
-  getData = () => {
+  getUserData = () => {
+    let user = JSON.parse(localStorage.user);
+    $.ajax({
+     url: '/api/v1/userdashboard/' + user.login,
+     type: 'GET',
+     dataType: 'json',
+     success: function(data1) {
+      this.setState({userdata: data1});
+    }.bind(this)
+  });
+  }
+
+  getAdminData = () => {
     $.ajax({
      url: '/api/v1/dashboard/admin',
      type: 'GET',
@@ -60,7 +72,7 @@ export default class DashboardView extends React.Component {
       {
         this.state.userType ?
         <DashBoard healthData={this.state.data} /> :
-        <UserDashBoard healthData={this.state.data} />
+        <UserDashBoard healthData={this.state.userdata} />
       }
       </div>
       );

@@ -35,7 +35,7 @@ function readDockerCompose(filepath) {
   return obj;
 }
 
-/*function writeNewDockerCompose(filepath,json) {
+/* function writeNewDockerCompose(filepath,json) {
   fs.writeFileSync(filepath, yaml.stringify(json));
 }*/
 
