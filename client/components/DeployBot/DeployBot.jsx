@@ -1,7 +1,6 @@
 import React from 'react';
 
 import Paper from 'material-ui/Paper';
-
 import SelectRepositoryMaterial from '../SelectRepositoryMaterial';
 import ServiceConfigurationMaterial from '../ServiceConfigurationMaterial';
 import AppConfigurationMaterial from '../AppConfigurationMaterial';
@@ -21,6 +20,12 @@ export default class DeployBot extends React.Component {
     this.state = {};
   }
 
+  static get contextTypes () {
+    return({
+      router: React.PropTypes.object.isRequired
+    });
+  }
+
   componentWillMount() {
     console.log('Listening on services');
     socket.on('services', (services) => {
@@ -30,6 +35,7 @@ export default class DeployBot extends React.Component {
 
     socket.on('complete', () => {
       console.log('Deployed');
+      this.context.router.push('/apps');
       this.setState({
         deployed: true
       });
@@ -92,9 +98,10 @@ export default class DeployBot extends React.Component {
   handleDnsChanged(newData) {
     console.log('DNS Changed');
     const services = this.state.servicesConfiguration;
+    let user = JSON.parse(localStorage.user);
     services.meta = {
       appName: newData.appName,
-      username: 'nischay'
+      username: user.login
     };
     console.log('deploy:', services);
     socket.emit('deploy', services);

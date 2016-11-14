@@ -71,7 +71,8 @@ module.exports = function(http) {
   });
  });
   socket.on('deploy', function(data) {
-   deploy(repopath, Object.keys(data.services).shift(), data.username, data.appName, function() {
+   deploy(repopath, Object.keys(data.services).shift(), data.meta.username,
+    data.meta.appName, function() {
     socket.emit('complete', 'hey');
    });
  });
