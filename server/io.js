@@ -1,6 +1,7 @@
 const io = require('socket.io')();
 const servers = require('./api/servers/servers.controller');
 const admindash = require('./api/admindashboard/admindashboard.controller');
+const deploy = require('./deploy');
 
 const redis = require('./redis');
 const async = require('async');
@@ -16,9 +17,9 @@ function prepareDirectory (repoName, branchName, userName, callback) {
     const mkdir = spawn('mkdir', ['-p', pathToCreate], {cwd: '.'});
     mkdir.on('close', function(exitCode) {
       if(exitCode === 0) {
-         let repopath = path.join(pathToCreate, branchName);
-         callback(null, repopath); }
-    });
+       let repopath = path.join(pathToCreate, branchName);
+       callback(null, repopath); }
+     });
   });
 }
 
@@ -39,44 +40,54 @@ function readDockerCompose(filepath) {
   fs.writeFileSync(filepath, yaml.stringify(json));
 }*/
 
-function clone(repoName, branchName, userName, socket) {
-let repopath;
+function clone(repoName, branchName, userName, socket, done) {
+  let repopath;
 
   async.series([
-  (callback) => {
+    (callback) => {
       prepareDirectory(repoName, branchName, userName, (err, path1) => {
-          repopath = path1;
-          callback(err);
+        repopath = path1;
+        callback(err);
       });
-  }, (callback) => {
+    }, (callback) => {
      cloneRepo(repoName, branchName, repopath, callback);
-  }, (callback) => {
+   }, (callback) => {
     let services = readDockerCompose(path.join(repopath, 'docker-compose.yml'));
-    callback(null, services);
-   }
-    ], function(err, results) {
-        socket.emit('services', results.pop());
-    });
+    callback(null, {services: services, repopath: repopath});
+  }
+  ], function(err, results) {
+    let result = results.pop();
+    socket.emit('services', result.services);
+    done(err, result.repopath);
+  });
 }
 
 module.exports = function(http) {
-   io.on('connection', function(socket) {
-      socket.on('clone', (data) => {
-         clone(data.repoName, data.branchName, data.userName, socket);
-      });
-      redis.nodes.on('message', function() {
-        servers.socketData(socket);
-        admindash.socketData(socket);
-      });
-      console.log('connected');
+ let repopath;
+ io.on('connection', function(socket) {
+  socket.on('clone', (data) => {
+   clone(data.repoName, data.branchName, data.userName, socket, function(err, repo) {
+    repopath = repo;
+  });
+ });
+  socket.on('deploy', function(data) {
+   deploy(repopath, Object.keys(data.services).shift(), data.username, data.appName, function() {
+    socket.emit('complete', 'hey');
    });
-   if(http) {
-      io.attach(http);
-   } else {
-      const https = require('http').createServer();
-      io.attach(https);
-      https.listen(8081, function() {
-         console.log('server listening on 8081');
-      });
-   }
+ });
+  redis.nodes.on('message', function() {
+    servers.socketData(socket);
+    admindash.socketData(socket);
+  });
+  console.log('connected');
+});
+ if(http) {
+  io.attach(http);
+} else {
+  const https = require('http').createServer();
+  io.attach(https);
+  https.listen(8081, function() {
+   console.log('server listening on 8081');
+ });
+}
 };

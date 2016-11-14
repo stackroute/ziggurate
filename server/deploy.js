@@ -2,7 +2,7 @@ const spawn = require('child_process').spawn;
 const async = require('async');
 const schema = require('./schema.model');
 
-module.exports = function(RepoPath, serviceName, username, appname) {
+module.exports = function(RepoPath, serviceName, username, appname, done) {
   async.waterfall([
    function(callback) {
      const build = spawn('docker-compose', ['build', serviceName], { cwd: RepoPath });
@@ -73,5 +73,5 @@ module.exports = function(RepoPath, serviceName, username, appname) {
   app.save(function() {
     callback(null);
   });
-}], function() { });
+}], function() { done(); });
 };
