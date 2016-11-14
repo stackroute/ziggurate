@@ -55,6 +55,7 @@ let repopath;
     callback(null, services);
    }
     ], function(err, results) {
+      console.log('Sending Services to client.');
         socket.emit('services', results.pop());
     });
 }
