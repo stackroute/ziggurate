@@ -10,6 +10,26 @@ const styles = {
 };
 
 export default class ServiceConfigurationMaterial extends React.Component {
+  constructor() {
+    super();
+    this.state = {};
+  }
+
+  static get propTypes() {
+    return {
+      services: React.PropTypes.object.isRequired,
+      valueChanged: React.PropTypes.func.isRequired
+    };
+  }
+
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({
+        services: this.props.services
+      });
+    });
+  }
+
   render() {
     return (
       <div>
@@ -36,7 +56,8 @@ export default class ServiceConfigurationMaterial extends React.Component {
           primary={true}
           label="Next"
           style={styles.button}
-          disabled={true} />
+          disabled={false}
+          onClick={this.props.valueChanged.bind(this, this.state.services)} />
       </div>
     );
   }
