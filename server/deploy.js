@@ -1,4 +1,4 @@
-const spawn = require('child_process').spawn;
+  const spawn = require('child_process').spawn;
 const async = require('async');
 const schema = require('./schema.model');
 
