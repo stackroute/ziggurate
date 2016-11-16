@@ -1,9 +1,10 @@
 /* eslint no-process-env: 0 */
 module.exports = {
     PORT: process.env.PORT || 8080,
-	GITHUB_CLIENT_ID: '674dd35f95c2ca00bbcc',
-	GITHUB_CLIENT_SECRET: '80b3431e6d93d489e014e949433976b1310d1e6b',
-	GITHUB_ORGANISATION: 'Ziggurate',
+  GITHUB_CLIENT_ID: '39f0454049473a267178',
+  GITHUB_CLIENT_SECRET: '6f81e8e96f0442b82b38fdf7ec28a416a840fa38',
+  GITHUB_ORGANISATION: 'Ziggurate',
+  MONGO_URL: 'mongodb://localhost/ziggurate',
     JWT_SECRET: process.env.JWT_SECRET || '824hdaueranteuhn',
-	USER_AGENT: process.env.USER_AGENT || 'ReactBoilerplate'
+  USER_AGENT: process.env.USER_AGENT || 'ReactBoilerplate'
 };
