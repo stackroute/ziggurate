@@ -87,8 +87,8 @@ module.exports = function(http) {
 } else {
   const https = require('http').createServer();
   io.attach(https);
-  https.listen(8081, function() {
-   console.log('server listening on 8081');
+  https.listen(8080, function() {
+   console.log('IO server listening on 8080');
  });
 }
 };

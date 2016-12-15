@@ -3,7 +3,7 @@ import HomeAppBar from '../../components/HomeAppBar';
 import NodesCluster from '../../components/NodesCluster';
 import $ from 'jquery';
 
-const socket = io();
+const socket = io('http://localhost:8080');
 class NodesClusterPage extends React.Component {
 
 	state= {

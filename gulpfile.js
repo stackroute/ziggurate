@@ -33,10 +33,11 @@ gulp.task('usemin', ['clean', 'webpack'], function() {
 });
 
 gulp.task('copy:fonts', ['clean'], function() {
-  return gulp.src('client/**/*.ttf')
+  return gulp.src('client/**/*.woff')
   .pipe(flatten())
   .pipe(gulp.dest('dist/server/public/fonts'));
 });
+
 
 gulp.task('copy:package.json', ['clean'], function() {
   return gulp.src('package.json')
@@ -116,9 +117,9 @@ gulp.task('webpack-dev-server', ['eslint', 'io'], function() {
       chunks: false,
       chunkModules: false
     }
-  }).listen('8080', 'localhost', function(err) {
+  }).listen('8081', 'localhost', function(err) {
     if(err) { throw new gutil.PluginError('webpack-dev-server', err); }
-    gutil.log('[webpack-dev-server]', 'http://localhost:8080/');
+    gutil.log('[webpack-dev-server]', 'http://localhost:8081/');
   });
 });
 

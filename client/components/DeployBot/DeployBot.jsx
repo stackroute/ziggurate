@@ -12,7 +12,7 @@ const styles = {
   }
 };
 
-const socket = io();
+const socket = io('http://localhost:8080');
 
 export default class DeployBot extends React.Component {
   constructor() {
@@ -21,13 +21,13 @@ export default class DeployBot extends React.Component {
   }
 
   static get contextTypes () {
-    return({
+    return(
+    {
       router: React.PropTypes.object.isRequired
     });
   }
 
   componentWillMount() {
-    console.log('Listening on services');
     socket.on('services', (services) => {
       console.log('Received Services');
       this.setState({services: services});

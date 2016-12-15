@@ -6,7 +6,7 @@ import UserDashBoard from '../../components/UserDashBoard';
 import jwt from 'jwt-decode';
 import cookie from 'react-cookie';
 
-const socket = io();
+const socket = io('http://localhost:8080');
 
 function decodeToken(token) {
   let decoded = jwt(token);

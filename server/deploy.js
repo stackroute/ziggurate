@@ -17,6 +17,7 @@ module.exports = function(RepoPath, serviceName, username, appname, done) {
     console.log('third');
     const pushImage = spawn('docker', ['push', '172.23.238.253:5000/' +
       serviceName], { cwd: RepoPath});
+    console.log('pushed');
     pushImage.on('close', () => { callback(null); });
   }, (callback) => {
     const buildBundle = spawn('docker-compose', ['bundle'], { cwd: RepoPath});
