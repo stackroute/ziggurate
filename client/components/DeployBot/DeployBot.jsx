@@ -5,14 +5,14 @@ import SelectRepositoryMaterial from '../SelectRepositoryMaterial';
 import ServiceConfigurationMaterial from '../ServiceConfigurationMaterial';
 import AppConfigurationMaterial from '../AppConfigurationMaterial';
 
+const socket = io('http://localhost:8080');
+
 const styles = {
   paper: {
     padding: '50px',
     margin: '10px'
   }
 };
-
-const socket = io('http://localhost:8080');
 
 export default class DeployBot extends React.Component {
   constructor() {

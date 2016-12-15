@@ -91,7 +91,7 @@ gulp.task('webpack-dev-server', ['eslint', 'io'], function() {
   const webpackConfig = require('./webpack.config');
   webpackConfig.devtool = 'cheap-eval-source-map';
   webpackConfig.debug = true;
-  webpackConfig.entry.app.unshift('webpack-dev-server/client?http://localhost:8080/',
+  webpackConfig.entry.app.unshift('webpack-dev-server/client?http://localhost:8081/',
     'webpack/hot/dev-server');
   webpackConfig.plugins = [new webpack.HotModuleReplacementPlugin()];
 

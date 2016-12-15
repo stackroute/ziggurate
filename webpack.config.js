@@ -22,6 +22,11 @@ module.exports = {
       loader: 'json'
     }]
   },
+  node: {
+    fs: 'empty',
+    net: 'empty',
+    tls: 'empty'
+  },
   resolve: {
     extensions: ['', '.js', '.jsx', '/index', '/index.js', '/index.jsx']
   },
