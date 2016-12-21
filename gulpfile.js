@@ -100,6 +100,7 @@ gulp.task('webpack-dev-server', ['eslint', 'io'], function() {
     contentBase: 'client/',
     hot: true,
     setup: function(app) {
+      require('./server/db.js');
       require('./server/app')(app, {static: false});
     },
     // It suppress error shown in console, so it has to be set to false.
