@@ -2,7 +2,6 @@ node_modules
 bower_components
 npm-debug.log
 dev.js
-production.js
 gulpFile.js
 *.dab
 dist
